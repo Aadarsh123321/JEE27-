@@ -34,6 +34,45 @@ const typeDelayMs=90,deleteDelayMs=80,holdDelayMs=2500,pauseDelayMs=500,typedTex
 function loopTypewriter(){const characters=Array.from(textToType);if(isDeleting){if(charIndex>0){charIndex--;typedTextSpan.textContent=characters.slice(0,charIndex).join('');typingTimeout=setTimeout(loopTypewriter,deleteDelayMs);}else{isDeleting=false;typingTimeout=setTimeout(loopTypewriter,pauseDelayMs);}}else{if(charIndex<characters.length){charIndex++;typedTextSpan.textContent=characters.slice(0,charIndex).join('');typingTimeout=setTimeout(loopTypewriter,typeDelayMs);}else{isDeleting=true;typingTimeout=setTimeout(loopTypewriter,holdDelayMs);}}}
 function updateBrandText(newText){clearTimeout(typingTimeout);textToType=newText.toUpperCase();charIndex=0;isDeleting=false;typedTextSpan.textContent="";loopTypewriter();}
 
+
+// --- NEW: PDF SOLUTIONS DIRECTORY (PASTE YOUR FLIPBOOK LINKS HERE) ---
+const chapterPdfLinks = {
+    // Calculus
+    "Function": "https://collection.cloudinary.com/yhelbo6v/16e70b54340a31311a70482968573f9e.html",
+    "Limit": "your_limit_pdf_url_here.html",
+    "Continuity & Differentiability": "your_continuity_pdf_url_here.html",
+    "Application of Derivatives": "your_aod_pdf_url_here.html",
+    "Integration": "your_integration_pdf_url_here.html",
+    
+    // Algebra
+    "Quadratic Equations": "your_quadratic_pdf_url_here.html",
+    "Sequence and Series": "your_sequence_pdf_url_here.html",
+    "Determinants": "your_determinants_pdf_url_here.html",
+    "Complex Numbers": "your_complex_pdf_url_here.html",
+    "Matrices": "your_matrices_pdf_url_here.html",
+    "Permutation & Combinations": "your_pnc_pdf_url_here.html",
+    "Binomial Theorem": "your_binomial_pdf_url_here.html",
+    "Probability": "your_probability_pdf_url_here.html",
+    "Logarithms": "your_logarithms_pdf_url_here.html",
+
+    // Co-ordinate Geometry
+    "Straight Lines": "your_straight_lines_pdf_url_here.html",
+    "Circle": "your_circle_pdf_url_here.html",
+    "Parabola": "your_parabola_pdf_url_here.html",
+    "Ellipse": "your_ellipse_pdf_url_here.html",
+    "Hyperbola": "your_hyperbola_pdf_url_here.html",
+    
+    // Trigonometry
+    "Compound Angles": "your_compound_angles_pdf_url_here.html",
+    "Trigonometric Equations": "your_trig_equations_pdf_url_here.html",
+    "Solution of Triangles": "your_sot_pdf_url_here.html",
+    "Inverse Trigonometric Functions": "your_itf_pdf_url_here.html",
+    
+    // Vector & 3D
+    "Vector & 3Dimensional Geometry": "your_vector3d_pdf_url_here.html"
+};
+
+
 // --- 3. FIREBASE CONFIG & LIVE LEADERBOARD LOGIC ---
 const firebaseConfig = {
   apiKey: "AIzaSyAH22AT6fP9cuDAFq8sXBLi9GFu9cvWgE4",
@@ -245,6 +284,19 @@ function loadQ(i){
 }
 
 
+// --- PDF SOLUTION PANEL LOGIC ---
+function openSolutionPanel() {
+    const pdfUrl = chapterPdfLinks[exData.ch] || "about:blank";
+    document.getElementById('solution-iframe').src = pdfUrl;
+    document.getElementById('solution-panel').classList.add('open');
+}
+
+function closeSolutionPanel() {
+    document.getElementById('solution-panel').classList.remove('open');
+    document.getElementById('solution-iframe').src = "";
+}
+
+
 // --- DYNAMIC RENDERING FOR ALL 4 QUESTION TYPES ---
 function renQ(){
     let q=qData[cIdx], l=q.l?"locked":"";
@@ -296,7 +348,12 @@ function renQ(){
     
     let correctHTML = `<div style="font-weight:700;color:#10b981;margin-bottom:10px;font-size:16px;">Correct Answer: ${correctDisplay}</div>`;
     
-    h+=`</div><div class="solution-container" style="display:${q.l?"block":"none"}">${correctHTML}<div style="font-weight:700;color:#60a5fa;margin-bottom:5px">Solution / Hint</div><div style="color:#cbd5e1">${q.s}</div></div>`;
+    // MODIFIED TO INCLUDE PDF SOLUTION BUTTON INSTEAD OF TEXT SOLUTION
+    h+=`</div>
+        <div class="solution-container" style="display:${q.l?"block":"none"}">
+            ${correctHTML}
+            <button class="btn btn-outline" style="margin-top: 10px; padding: 8px 20px; font-weight: 600; border: 1px solid #60a5fa; color: #60a5fa; background: transparent; cursor: pointer; border-radius: 6px; transition: 0.3s;" onmouseover="this.style.background='rgba(96, 165, 250, 0.1)'" onmouseout="this.style.background='transparent'" onclick="openSolutionPanel()">See Solution</button>
+        </div>`;
     document.getElementById("q-area").innerHTML=h;
 }
 
