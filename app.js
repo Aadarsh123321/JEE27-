@@ -38,7 +38,7 @@ function updateBrandText(newText){clearTimeout(typingTimeout);textToType=newText
 // --- NEW: PDF SOLUTIONS DIRECTORY (PASTE YOUR FLIPBOOK LINKS HERE) ---
 const chapterPdfLinks = {
     // Calculus
-    "Function": "https://collection.cloudinary.com/yhelbo6v/16e70b54340a31311a70482968573f9e.html",
+    "Function": "https://go.fliplink.me/view/BF58348A-AD10-47C2-A74D-13CF46FD1E33.html",
     "Limit": "your_limit_pdf_url_here.html",
     "Continuity & Differentiability": "your_continuity_pdf_url_here.html",
     "Application of Derivatives": "your_aod_pdf_url_here.html",
