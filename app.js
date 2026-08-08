@@ -43,6 +43,8 @@ const chapterPdfLinks = {
     "Continuity & Differentiability": "your_continuity_pdf_url_here.html",
     "Application of Derivatives": "your_aod_pdf_url_here.html",
     "Integration": "your_integration_pdf_url_here.html",
+    "Area Under Curves": "your_auc_pdf_url_here.html",
+    "Differential Equations": "your_diff_eq_pdf_url_here.html",
     
     // Algebra
     "Quadratic Equations": "your_quadratic_pdf_url_here.html",
@@ -285,15 +287,21 @@ function loadQ(i){
 
 
 // --- PDF SOLUTION PANEL LOGIC ---
+let currentLoadedPdf = "";
 function openSolutionPanel() {
     const pdfUrl = chapterPdfLinks[exData.ch] || "about:blank";
-    document.getElementById('solution-iframe').src = pdfUrl;
+    const iframe = document.getElementById('solution-iframe');
+    
+    if (currentLoadedPdf !== pdfUrl) {
+        iframe.src = pdfUrl;
+        currentLoadedPdf = pdfUrl;
+    }
+    
     document.getElementById('solution-panel').classList.add('open');
 }
 
 function closeSolutionPanel() {
     document.getElementById('solution-panel').classList.remove('open');
-    document.getElementById('solution-iframe').src = "";
 }
 
 
