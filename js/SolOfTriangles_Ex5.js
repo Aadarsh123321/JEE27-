@@ -1,0 +1,17 @@
+// js/SolOfTriangles_Ex5.js
+window.customQData = [
+  { id: 1, type: "numeric", t: '<img src="https://res.cloudinary.com/yhelbo6v/image/upload/v1786285949/question_page_357_1786271377089_y19a2g.png" style="width: 100%; border-radius: 8px;" alt="Q">', o: [], c: "2", s: "Detailed solution will be updated soon." },
+  { id: 2, type: "numeric", t: '<img src="https://res.cloudinary.com/yhelbo6v/image/upload/v1786285955/question_page_357_1786271383352_onqy4u.png" style="width: 100%; border-radius: 8px;" alt="Q">', o: [], c: "1", s: "Detailed solution will be updated soon." },
+  { id: 3, type: "numeric", t: '<img src="https://res.cloudinary.com/yhelbo6v/image/upload/v1786285959/question_page_357_1786271389174_kr41qv.png" style="width: 100%; border-radius: 8px;" alt="Q">', o: [], c: "3", s: "Detailed solution will be updated soon." },
+  { id: 4, type: "numeric", t: '<img src="https://res.cloudinary.com/yhelbo6v/image/upload/v1786285962/question_page_357_1786271392977_omikko.png" style="width: 100%; border-radius: 8px;" alt="Q">', o: [], c: "1", s: "Detailed solution will be updated soon." },
+  { id: 5, type: "numeric", t: '<img src="https://res.cloudinary.com/yhelbo6v/image/upload/v1786285966/question_page_357_1786271397167_nj857p.png" style="width: 100%; border-radius: 8px;" alt="Q">', o: [], c: "7", s: "Detailed solution will be updated soon." },
+  { id: 6, type: "numeric", t: '<img src="https://res.cloudinary.com/yhelbo6v/image/upload/v1786285969/question_page_357_1786271403308_nm4jmi.png" style="width: 100%; border-radius: 8px;" alt="Q">', o: [], c: "2", s: "Detailed solution will be updated soon." },
+  { id: 7, type: "numeric", t: '<img src="https://res.cloudinary.com/yhelbo6v/image/upload/v1786285974/question_page_357_1786271412033_zgbukp.png" style="width: 100%; border-radius: 8px;" alt="Q">', o: [], c: "2", s: "Detailed solution will be updated soon." },
+  { id: 8, type: "numeric", t: '<img src="https://res.cloudinary.com/yhelbo6v/image/upload/v1786285978/question_page_357_1786271415711_gq25yt.png" style="width: 100%; border-radius: 8px;" alt="Q">', o: [], c: "3", s: "Detailed solution will be updated soon." },
+  { id: 9, type: "numeric", t: '<img src="https://res.cloudinary.com/yhelbo6v/image/upload/v1786285982/question_page_357_1786271418908_kwqmwr.png" style="width: 100%; border-radius: 8px;" alt="Q">', o: [], c: "3", s: "Detailed solution will be updated soon." },
+  { id: 10, type: "numeric", t: '<img src="https://res.cloudinary.com/yhelbo6v/image/upload/v1786285986/question_page_357_1786271422429_wpfj43.png" style="width: 100%; border-radius: 8px;" alt="Q">', o: [], c: "7", s: "Detailed solution will be updated soon." },
+  { id: 11, type: "numeric", t: '<img src="https://res.cloudinary.com/yhelbo6v/image/upload/v1786285990/question_page_358_1786271429522_amr7gj.png" style="width: 100%; border-radius: 8px;" alt="Q">', o: [], c: "6", s: "Detailed solution will be updated soon." },
+  { id: 12, type: "numeric", t: '<img src="https://res.cloudinary.com/yhelbo6v/image/upload/v1786285993/question_page_358_1786271435893_obd9sg.png" style="width: 100%; border-radius: 8px;" alt="Q">', o: [], c: "4", s: "Detailed solution will be updated soon." },
+  { id: 13, type: "numeric", t: '<img src="https://res.cloudinary.com/yhelbo6v/image/upload/v1786285998/question_page_358_1786271439472_udeonf.png" style="width: 100%; border-radius: 8px;" alt="Q">', o: [], c: "4", s: "Detailed solution will be updated soon." }
+];
+
