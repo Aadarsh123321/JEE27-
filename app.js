@@ -38,7 +38,7 @@ function updateBrandText(newText){clearTimeout(typingTimeout);textToType=newText
 // --- NEW: PDF SOLUTIONS DIRECTORY (PASTE YOUR FLIPBOOK LINKS HERE) ---
 const chapterPdfLinks = {
     // Calculus
-    "Function": "https://u30050097.ct.sendgrid.net/ls/click?upn=u001.Eo9tD3rlNsRSQLrJFpRks5ir-2B2CBnvXKsD6fijZn1xxItoKL0fZRIRywH-2F-2FVtr5-2FBICyDSXzZdycLInlopMpV1M51SIe-2BoWA2nqo8qGZ9rUBcqCOfH-2FNxN-2FXnpdlPgX3krpUHbxO-2BOWv7qFpaqB13ocqoiGXh1UQHcgJLcNumROdzq7pU9Lmif36hwKOMcwGtr1H5LtBYDDoDQfT0Wd9LHYhZYCHLRYX3U-2BlrhxrI5o-3DMU0i_L8xsP5h8XKdYcwA6JOrJt1FZxEYlqZ57rK8x9pTLoHIiILlfapC25jOBjvwwXIqq9fnkV4d41wBG3niY9zkFNF8ZmH1EFZnIpaHXqTDYHIIp-2FncByoShmLEBLSIqpGLGr8VzO7ZQjNBvf5Ii7tHzvgErVI6ilYNEiMr82L70-2B4fDCb2wXTGg7VNmRfwWss9i6N4i-2Fn11jwzQUixVnGpnPPgfOJ-2FteXJfOmGQwJaOTLk-3D",
+    "Function": "https://publuu.com/flip-book/1158937/2578062",
     "Limit": "your_limit_pdf_url_here.html",
     "Continuity & Differentiability": "your_continuity_pdf_url_here.html",
     "Application of Derivatives": "your_aod_pdf_url_here.html",
