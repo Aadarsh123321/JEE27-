@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=no">
     <title>JEE Advanced Practice Matrix</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js'></script>
@@ -10,6 +10,11 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Flipbook Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
+
     <style>
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -387,13 +392,6 @@
                 <div style="padding:15px 20px;background:#1f2937;font-weight:600;color:white;">Question Palette</div>
                 <div class="palette-container" id="pal"></div>
             </div>
-        </div>
-
-        <!-- NEW PDF SOLUTION SLIDING PANEL -->
-        <div class="sliding-panel" id="solution-panel" style="height: 75vh; padding: 2rem 1rem 1rem 1rem; z-index: 1000; background: var(--surface-color);">
-            <button class="close-panel" onclick="closeSolutionPanel()" style="top: 15px; right: 20px;">×</button>
-            <h3 style="color:var(--text-primary); margin-bottom: 1rem; text-align: center;">Detailed Solution</h3>
-            <iframe id="solution-iframe" src="" style="width: 100%; height: calc(100% - 40px); border: none; border-radius: 8px;"></iframe>
         </div>
     </div>
 
