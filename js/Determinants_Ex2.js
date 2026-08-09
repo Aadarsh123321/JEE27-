@@ -1,0 +1,12 @@
+// js/Determinants_Ex2.js
+window.customQData = [
+  { id: 1, type: "multi", t: '<img src="https://res.cloudinary.com/yhelbo6v/image/upload/v1786225212/question_page_205_1786219301493_qnznd6.png" style="width: 100%; border-radius: 8px;" alt="Q">', o: ["Option A", "Option B", "Option C", "Option D"], c: [1, 2, 3], s: "Detailed solution will be updated soon." },
+  { id: 2, type: "multi", t: '<img src="https://res.cloudinary.com/yhelbo6v/image/upload/v1786225213/question_page_205_1786219306142_feao2d.png" style="width: 100%; border-radius: 8px;" alt="Q">', o: ["Option A", "Option B", "Option C", "Option D"], c: [1, 3], s: "Detailed solution will be updated soon." },
+  { id: 3, type: "multi", t: '<img src="https://res.cloudinary.com/yhelbo6v/image/upload/v1786225218/question_page_205_1786219311381_dpii8q.png" style="width: 100%; border-radius: 8px;" alt="Q">', o: ["Option A", "Option B", "Option C", "Option D"], c: [0, 1], s: "Detailed solution will be updated soon." },
+  { id: 4, type: "multi", t: '<img src="https://res.cloudinary.com/yhelbo6v/image/upload/v1786225220/question_page_205_1786219314588_dcwvx7.png" style="width: 100%; border-radius: 8px;" alt="Q">', o: ["Option A", "Option B", "Option C", "Option D"], c: [0, 1], s: "Detailed solution will be updated soon." },
+  { id: 5, type: "multi", t: '<img src="https://res.cloudinary.com/yhelbo6v/image/upload/v1786225225/question_page_205_1786219318093_zko7gp.png" style="width: 100%; border-radius: 8px;" alt="Q">', o: ["Option A", "Option B", "Option C", "Option D"], c: [0, 1, 3], s: "Detailed solution will be updated soon." },
+  { id: 6, type: "multi", t: '<img src="https://res.cloudinary.com/yhelbo6v/image/upload/v1786225227/question_page_205_1786219322563_c7hvt3.png" style="width: 100%; border-radius: 8px;" alt="Q">', o: ["Option A", "Option B", "Option C", "Option D"], c: [0, 1, 3], s: "Detailed solution will be updated soon." },
+  { id: 7, type: "multi", t: '<img src="https://res.cloudinary.com/yhelbo6v/image/upload/v1786225232/question_page_205_1786219330522_g2t5it.png" style="width: 100%; border-radius: 8px;" alt="Q">', o: ["Option A", "Option B", "Option C", "Option D"], c: [1, 2, 3], s: "Detailed solution will be updated soon." },
+  { id: 8, type: "multi", t: '<img src="https://res.cloudinary.com/yhelbo6v/image/upload/v1786225233/question_page_206_1786219335749_gyg8sg.png" style="width: 100%; border-radius: 8px;" alt="Q">', o: ["Option A", "Option B", "Option C", "Option D"], c: [1], s: "Detailed solution will be updated soon." }
+];
+
