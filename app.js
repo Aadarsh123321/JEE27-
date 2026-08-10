@@ -1,4 +1,4 @@
-// --- 1. DYNAMIC CSS & UI INJECTION (MAXIMUM ENHANCEMENTS) ---
+// --- 1. DYNAMIC CSS & UI INJECTION (MAXIMUM ENHANCEMENTS + PREMIUM MOBILE UX) ---
 const style=document.createElement('style');
 style.textContent=`:root{--bg-color:#050814;--surface-color:rgba(22, 27, 46, 0.7);--text-primary:#ffffff;--text-secondary:#94a3b8;--accent-color:#ffffff;--highlight:#3b82f6;--glow-highlight:rgba(59, 130, 246, 0.6);--border-color:rgba(255,255,255,0.1);--leaderboard-bg:#0a0f1c;--diamond-color:#bc6bf0;--gift-color:#ef8716;--text-shadow-color:#ffffff;--dropdown-bg:#1e1f22;--ring-gradient:conic-gradient(#ea4335,#4285f4,#34a853,#fbbc05,#ea4335)}
 body.light-mode{--bg-color:#f1f5f9;--surface-color:rgba(255, 255, 255, 0.8);--text-primary:#0f172a;--text-secondary:#475569;--accent-color:#000000;--highlight:#2563eb;--glow-highlight:rgba(37, 99, 235, 0.4);--border-color:rgba(0,0,0,0.1);--leaderboard-bg:#e2e8f0;--dropdown-bg:#ffffff;--text-shadow-color:rgba(0,0,0,0.2)}
@@ -14,6 +14,7 @@ header{display:flex;justify-content:space-between;align-items:center;padding:1re
 
 /* NEON GLOW PULSE ADDED HERE */
 .brand h1{font-size:28px;font-weight:800;letter-spacing:2px;display:flex;align-items:center;white-space:nowrap;color:#ffffff;animation: neonPulse 1.5s ease-in-out infinite alternate;} 
+#typed-text { display: inline-block; max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: bottom; }
 @keyframes neonPulse { 
     from { text-shadow: 0 0 5px #fff, 0 0 10px var(--highlight), 0 0 20px var(--highlight), 0 0 40px var(--highlight); } 
     to { text-shadow: 0 0 2px #fff, 0 0 5px var(--highlight), 0 0 10px var(--highlight), 0 0 20px var(--highlight); } 
@@ -137,31 +138,140 @@ main{flex:1;display:flex;flex-direction:column;overflow:hidden}
 #nav-prev { left: 15px; }
 #nav-next { right: 15px; }
 
-@media (max-width: 768px) {
-    header { flex-wrap: wrap; padding: 1rem; gap: 10px; justify-content: space-between; }
-    .brand h1 { font-size: 20px; }
-    nav { position: static; transform: none; width: 100%; justify-content: space-around; order: 3; margin-top: 10px; }
+.hamburger-btn { display: none; }
+
+/* =========================================================
+   MOBILE EXCLUSIVE PREMIUM UI OVERRIDE (MAX 768px)
+   ========================================================= */
+@media screen and (max-width: 768px) {
+    /* Premium Native App-style Header */
+    header { flex-wrap: nowrap; padding: 12px 15px; z-index: 2000; position: sticky; top: 0; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .hamburger-btn.active-tab { display: flex !important; align-items: center; justify-content: center; background: none; border: none; color: white; font-size: 28px; padding: 0 15px 0 0; cursor: pointer; transition: transform 0.2s; }
+    .hamburger-btn:active { transform: scale(0.9); }
+    
+    /* Typewriter Wrap Fix */
+    .brand h1 { font-size: 1.25rem !important; white-space: nowrap; }
+    #typed-text { max-width: 110px; display: inline-block; overflow: hidden; text-overflow: ellipsis; vertical-align: bottom; }
+    
+    /* Premium Native App-style Bottom Navigation */
+    nav { 
+        position: fixed; bottom: 0; left: 0; width: 100%; 
+        background: rgba(10, 15, 28, 0.95); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+        border-top: 1px solid rgba(255,255,255,0.1); 
+        padding: 15px 0 20px 0; margin: 0; transform: none; order: unset; 
+        justify-content: space-evenly; z-index: 1000;
+        box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
+        border-top-left-radius: 25px; border-top-right-radius: 25px;
+    }
+    nav button { font-size: 0.95rem; padding: 8px 15px; }
+    nav button::after { bottom: -6px; height: 4px; border-radius: 4px; }
+    
+    /* Main Content Spacing for Bottom Nav */
+    main { padding-bottom: 80px; }
+    
+    /* Hero Section Fix */
     .hero h1 { font-size: 2.8rem; text-align: center; line-height: 1.2; padding: 0 10px; }
     .hero p.desc { font-size: 1rem; padding: 0 1.5rem; }
     .hero-buttons { flex-direction: column; width: 100%; padding: 0 2rem; gap: 1rem; align-items: center; }
     .btn-primary, .btn-outline { width: 100%; max-width: 300px; text-align: center; }
-    #practice { flex-direction: column; }
-    .sidebar { width: 100%; max-height: 250px; border-right: none; border-bottom: 1px solid var(--border-color); }
-    .exercises-container { padding: 1.5rem; }
-    .exercise-card { flex-direction: column; align-items: flex-start; gap: 15px; padding: 1.5rem; }
+    
+    /* Practice Tab - Hamburger Drawer Implementation */
+    #practice { flex-direction: row; position: relative; }
+    
+    /* Premium Glassmorphism Drawer */
+    .sidebar { 
+        position: fixed; top: 0; left: -320px; width: 280px; height: 100vh; 
+        background: rgba(10, 15, 28, 0.98); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
+        border-right: 1px solid rgba(255,255,255,0.1); border-bottom: none;
+        z-index: 3000; transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+        max-height: 100vh; padding: 80px 1.5rem 6rem 1.5rem; /* Room for header and bottom nav */
+        box-shadow: none; 
+    }
+    .sidebar.open { left: 0; box-shadow: 20px 0 60px rgba(0,0,0,0.7); }
+    
+    /* Drawer Overlay */
+    .sidebar-overlay { 
+        display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
+        background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+        z-index: 2999; opacity: 0; transition: opacity 0.4s ease; 
+    }
+    .sidebar-overlay.show { display: block; opacity: 1; }
+    
+    .exercises-container { padding: 1.5rem 1rem 2rem 1rem; width: 100%; overflow-y: auto; }
+    .exercise-card { flex-direction: column; align-items: flex-start; gap: 15px; padding: 1.5rem; border-radius: 20px; }
+    
+    /* Leaderboard Fixes - Strict Row Layout */
+    #leaderboard { padding: 2rem 1rem; }
+    .rankings-header { font-size: 1.8rem; text-align: center; justify-content: center; margin-bottom: 2rem; white-space: nowrap; }
+    .lb-list { padding: 1rem; border-radius: 20px; }
+    
+    /* Ensure elements don't stack on mobile */
+    .lb-row { flex-direction: row !important; align-items: center !important; gap: 10px; padding: 1rem 0.5rem; text-align: left !important; }
+    .lb-user { flex: 1; gap: 10px; min-width: 0; display: flex; align-items: center; }
+    .rank-badge { font-size: 1.2rem; width: 30px; }
+    .small-avatar { width: 42px; height: 42px; border-width: 2px; }
+    
+    /* Name and Stat Truncation Magic */
+    .lb-name { font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px; }
+    .lb-stats { font-size: 0.75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px; }
+    .lb-score { margin-left: auto !important; padding: 6px 10px; font-size: 0.85rem; align-self: center !important; white-space: nowrap; }
+
+    /* Test Environment Enhancements */
     .practice-container { flex-direction: column; overflow-y: auto; padding: 10px; gap: 10px; }
-    .left-panel, .right-panel { flex: none; width: 100%; min-width: 100%; border-radius:12px;}
+    .left-panel, .right-panel { flex: none; width: 100%; min-width: 100%; border-radius: 16px; }
     .question-header { flex-wrap: wrap; gap: 10px; }
-    .action-bar { flex-wrap: wrap; gap: 10px; justify-content: center; }
-    .rankings-header { font-size: 1.8rem; text-align: center; }
-    .lb-row { flex-direction: column; gap: 10px; align-items: flex-start; text-align: left; }
-    .lb-score { align-self: flex-start; margin-left: 65px; }
+    .action-bar { flex-wrap: wrap; gap: 10px; justify-content: space-between; }
+    .btn { padding: 10px 15px; font-size: 0.9rem; }
+    
+    .header-actions { gap: 12px; }
+    .search-bar { width: 130px; padding: 0.5rem 1rem; font-size: 0.85rem; }
+    .btn-google { padding: 8px 12px; font-size: 0.85rem; }
+    .icon-btn { width: 38px; height: 38px; font-size: 1.1rem; }
 }`;
 document.head.appendChild(style);
 
-document.getElementById('inject-header').outerHTML=`<header><div class="brand" onclick="switchTab('home')"><h1><span id="typed-text"></span><span class="cursor">|</span><span class="custom-badges"><svg class="diamond" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><mask id="diamondMask"><rect width="100" height="100" fill="white" /><g stroke="black" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="48" x2="95" y2="48" /><line x1="22" y1="20" x2="50" y2="48" /><line x1="78" y1="20" x2="50" y2="48" /><line x1="28" y1="48" x2="50" y2="92" /><line x1="72" y1="48" x2="50" y2="92" /></g></mask></defs><polygon points="50,92 5,48 22,20 78,20 95,48" fill="var(--diamond-color)" mask="url(#diamondMask)" /></svg><svg class="gift" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><mask id="giftMask"><rect width="100" height="100" fill="white" /><rect x="46" y="40" width="8" height="55" fill="black" /><rect x="15" y="66" width="70" height="7" fill="black" /></mask></defs><path d="M 45 43 C 25 12, 10 38, 43 43" stroke="var(--gift-color)" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M 55 43 C 75 12, 90 38, 57 43" stroke="var(--gift-color)" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><g mask="url(#giftMask)"><rect x="22" y="54" width="56" height="38" rx="6" fill="var(--gift-color)" /><rect x="16" y="42" width="68" height="12" rx="4" fill="var(--gift-color)" /></g></svg></span></h1></div><nav><button id="btn-tab-home" onclick="switchTab('home')">Home</button><button id="btn-tab-practice" onclick="switchTab('practice')">Practice</button><button id="btn-tab-leaderboard" onclick="switchTab('leaderboard')">Leaderboard</button></nav><div class="header-actions"><input type="text" class="search-bar" id="search-input" placeholder="Search Chapters..." onkeyup="filterChapters()"><button id="btn-login" class="btn-google" onclick="signInWithGoogle()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.16v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.16C1.43 8.55 1 10.22 1 12s.43 3.45 1.16 4.93l3.68-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.16 7.07l3.68 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>Sign In</button><div id="profile-wrapper" class="profile-wrapper"><img id="nav-profile-pic" class="nav-profile-pic" src="" alt="Profile" onclick="toggleDropdown()" referrerpolicy="no-referrer"><div id="profile-dropdown" class="profile-dropdown"><div class="dropdown-email" id="user-email">email@example.com</div><div class="profile-ring-container"><img id="dropdown-profile-pic" class="dropdown-profile-pic" src="" alt="Profile Large" referrerpolicy="no-referrer"></div><div class="dropdown-greeting" id="user-greeting">Hi, USER!</div><button class="btn-logout" onclick="signOutUser()">Sign out</button></div></div><button class="icon-btn" id="theme-toggle" onclick="toggleTheme()">☾</button></div></header>`;
+// --- Inject Dynamic Hamburger Button and Header ---
+document.getElementById('inject-header').outerHTML=`
+<header>
+    <div style="display:flex; align-items:center;">
+        <button id="mobile-menu-btn" class="hamburger-btn" onclick="toggleMobileSidebar()">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <div class="brand" onclick="switchTab('home')">
+            <h1><span id="typed-text"></span><span class="cursor">|</span><span class="custom-badges"><svg class="diamond" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><mask id="diamondMask"><rect width="100" height="100" fill="white" /><g stroke="black" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="48" x2="95" y2="48" /><line x1="22" y1="20" x2="50" y2="48" /><line x1="78" y1="20" x2="50" y2="48" /><line x1="28" y1="48" x2="50" y2="92" /><line x1="72" y1="48" x2="50" y2="92" /></g></mask></defs><polygon points="50,92 5,48 22,20 78,20 95,48" fill="var(--diamond-color)" mask="url(#diamondMask)" /></svg><svg class="gift" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><mask id="giftMask"><rect width="100" height="100" fill="white" /><rect x="46" y="40" width="8" height="55" fill="black" /><rect x="15" y="66" width="70" height="7" fill="black" /></mask></defs><path d="M 45 43 C 25 12, 10 38, 43 43" stroke="var(--gift-color)" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M 55 43 C 75 12, 90 38, 57 43" stroke="var(--gift-color)" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><g mask="url(#giftMask)"><rect x="22" y="54" width="56" height="38" rx="6" fill="var(--gift-color)" /><rect x="16" y="42" width="68" height="12" rx="4" fill="var(--gift-color)" /></g></svg></span></h1>
+        </div>
+    </div>
+    <nav>
+        <button id="btn-tab-home" onclick="switchTab('home')">Home</button>
+        <button id="btn-tab-practice" onclick="switchTab('practice')">Practice</button>
+        <button id="btn-tab-leaderboard" onclick="switchTab('leaderboard')">Leaderboard</button>
+    </nav>
+    <div class="header-actions">
+        <input type="text" class="search-bar" id="search-input" placeholder="Search Chapters..." onkeyup="filterChapters()">
+        <button id="btn-login" class="btn-google" onclick="signInWithGoogle()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.16v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.16C1.43 8.55 1 10.22 1 12s.43 3.45 1.16 4.93l3.68-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.16 7.07l3.68 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>Sign In</button>
+        <div id="profile-wrapper" class="profile-wrapper">
+            <img id="nav-profile-pic" class="nav-profile-pic" src="" alt="Profile" onclick="toggleDropdown()" referrerpolicy="no-referrer">
+            <div id="profile-dropdown" class="profile-dropdown">
+                <div class="dropdown-email" id="user-email">email@example.com</div>
+                <div class="profile-ring-container"><img id="dropdown-profile-pic" class="dropdown-profile-pic" src="" alt="Profile Large" referrerpolicy="no-referrer"></div>
+                <div class="dropdown-greeting" id="user-greeting">Hi, USER!</div>
+                <button class="btn-logout" onclick="signOutUser()">Sign out</button>
+            </div>
+        </div>
+        <button class="icon-btn" id="theme-toggle" onclick="toggleTheme()">☾</button>
+    </div>
+</header>`;
+
 document.getElementById('inject-home').outerHTML=`<div id="home" class="tab-content"><div id="canvas-container"></div><div class="hero"><p class="tagline">Welcome to the Matrix</p><h1>Elevate Your JEE Prep</h1><p class="desc">Experience a seamless, user-centric practice environment meticulously crafted for JEE Advanced aspirants. Sync your progress and conquer standard references.</p><div class="hero-buttons"><button class="btn-primary" onclick="switchTab('practice')">Start Practicing</button><button class="btn-outline" onclick="togglePanel()">Platform Info</button></div></div><div class="sliding-panel" id="info-panel"><button class="close-panel" onclick="togglePanel()">×</button><h2 style="color:var(--text-primary);margin-bottom:1rem; font-size:2rem;">About The Platform</h2><p style="color:var(--text-secondary);line-height:1.8;margin-bottom:1rem; font-size:1.1rem;">Hello, I am AADARSH currently I'm building this site , Creating user-centric solutions for a better tomorrow.</p><p style="color:var(--text-secondary);line-height:1.8; font-size:1.1rem;">This section is dedicated to rigorous JEE Advanced preparation. Here, you will find meticulously digitized chapters from standard references like the complete Black Book. Click on 'Start Practicing' to resume exactly where you left off in your mock tests.</p></div></div>`;
 document.getElementById('inject-leaderboard').outerHTML=`<div id="leaderboard" class="tab-content"><div class="rankings-header">GLOBAL RANKINGS</div><div class="lb-list" id="leaderboard-container"><div class="lb-empty-state" id="lb-empty-state">No members currently or loading data... Sign in and start practicing to get ranked!</div><div id="lb-dynamic-content" style="display:none; width: 100%;"></div></div></div>`;
+
+// Inject Overlay for Mobile Sidebar dynamically
+const overlayDiv = document.createElement('div');
+overlayDiv.id = 'mobile-sidebar-overlay';
+overlayDiv.className = 'sidebar-overlay';
+overlayDiv.onclick = toggleMobileSidebar;
+document.body.appendChild(overlayDiv);
+
 
 // --- 2. TYPEWRITER EFFECT LOGIC ---
 let textToType="U2",charIndex=0,isDeleting=false,typingTimeout;
@@ -169,7 +279,7 @@ const typeDelayMs=90,deleteDelayMs=80,holdDelayMs=2500,pauseDelayMs=500,typedTex
 function loopTypewriter(){const characters=Array.from(textToType);if(isDeleting){if(charIndex>0){charIndex--;typedTextSpan.textContent=characters.slice(0,charIndex).join('');typingTimeout=setTimeout(loopTypewriter,deleteDelayMs);}else{isDeleting=false;typingTimeout=setTimeout(loopTypewriter,pauseDelayMs);}}else{if(charIndex<characters.length){charIndex++;typedTextSpan.textContent=characters.slice(0,charIndex).join('');typingTimeout=setTimeout(loopTypewriter,typeDelayMs);}else{isDeleting=true;typingTimeout=setTimeout(loopTypewriter,holdDelayMs);}}}
 function updateBrandText(newText){clearTimeout(typingTimeout);textToType=newText.toUpperCase();charIndex=0;isDeleting=false;typedTextSpan.textContent="";loopTypewriter();}
 
-// --- NEW: EXACT GITHUB PDF SOLUTIONS DIRECTORY (From Screenshot) ---
+// --- NEW: EXACT GITHUB PDF SOLUTIONS DIRECTORY ---
 const PDF_BASE_URL = "https://raw.githubusercontent.com/Aadarsh123321/JEE27-./main/";
 const chapterPdfLinks = {
     // Calculus
@@ -249,7 +359,7 @@ function initLiveLeaderboard() {
                 <div class="lb-user">
                     <div class="rank-badge">#${rank}</div>
                     <img class="small-avatar" src="${data.photoURL}" alt="Avatar" referrerpolicy="no-referrer">
-                    <div>
+                    <div style="min-width:0;">
                         <div class="lb-name">${data.name}</div>
                         <div class="lb-stats">JEE Advanced Aspirant</div>
                     </div>
@@ -315,14 +425,40 @@ function switchTab(tabId){
     let btnTab = document.getElementById('btn-tab-' + tabId);
     if(btnTab) btnTab.classList.add('active');
     
-    const searchBar=document.getElementById('search-input');
-    if(tabId==='practice'){searchBar.style.display='block';}
-    else{searchBar.style.display='none';}
+    const searchBar = document.getElementById('search-input');
+    const hamburger = document.getElementById('mobile-menu-btn');
+    
+    if(tabId==='practice'){
+        searchBar.style.display='block';
+        if(hamburger) hamburger.classList.add('active-tab'); // Show hamburger on mobile
+    }
+    else{
+        searchBar.style.display='none';
+        if(hamburger) hamburger.classList.remove('active-tab'); // Hide hamburger on mobile
+    }
+}
+
+// Hamburger Drawer Logic Strictly for Mobile
+function toggleMobileSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.getElementById('mobile-sidebar-overlay');
+    if (!sidebar || !overlay) return;
+
+    if (sidebar.classList.contains('open')) {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('show');
+        setTimeout(() => overlay.style.display = 'none', 400);
+    } else {
+        sidebar.classList.add('open');
+        overlay.style.display = 'block';
+        setTimeout(() => overlay.classList.add('show'), 10);
+    }
 }
 
 function toggleTheme(){const body=document.body,themeBtn=document.getElementById('theme-toggle');body.classList.toggle('light-mode');if(body.classList.contains('light-mode')){themeBtn.textContent='☼';}else{themeBtn.textContent='☾';}}
 function togglePanel(){document.getElementById('info-panel').classList.toggle('open');}
 function filterChapters(){let input=document.getElementById('search-input').value.toLowerCase(),listItems=document.querySelectorAll('.chapter-list li');listItems.forEach(li=>{li.style.display=li.textContent.toLowerCase().includes(input)?"":"none";});}
+
 function loadExercises(chapterName,element){
     document.querySelectorAll('.chapter-list li').forEach(el=>el.classList.remove('selected'));
     element.classList.add('selected');
@@ -332,6 +468,14 @@ function loadExercises(chapterName,element){
     let safeId='ch-'+chapterName.replace(/\s+/g,'').replace(/&/g,'and');
     let activeCh=document.getElementById(safeId);
     if(activeCh) activeCh.style.display='block';
+
+    // Auto-close Drawer on Mobile when a chapter is selected
+    if (window.innerWidth <= 768) {
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar && sidebar.classList.contains('open')) {
+            toggleMobileSidebar();
+        }
+    }
 }
 
 // --- 5. PRACTICE MODE DYNAMIC SCRIPT INTEGRATION & CLOUD SYNC LOGIC ---
@@ -636,7 +780,6 @@ function renQ(){
             </label>`;
         });
     } 
-    // EX2 EXACT DOM LOGIC INJECTED
     else if (type === 'multi') {
         let soArr = Array.isArray(q.so) ? q.so : [];
         q.o.forEach((o,i)=>{
@@ -750,7 +893,7 @@ function selTxt(v){
     }
 }
 
-// --- EX2 BUG FIX: RELY PURELY ON LIVE q.so DATA FOR 100% ACCURACY ---
+// --- EX2 BUG FIX: RELY PURELY ON LIVE q.so DATA ---
 function chkAns(){
     let q=qData[cIdx];
     let type = getQType(q); 
