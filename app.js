@@ -11,7 +11,14 @@ body{background:radial-gradient(circle at top right, var(--bg-color), #000000);c
 header{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;border-bottom:1px solid var(--border-color);background-color:rgba(10, 15, 28, 0.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);position:sticky;top:0;z-index:100;box-shadow:0 4px 30px rgba(0,0,0,0.3);}
 .brand{display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.3s;}
 .brand:hover{transform:scale(1.02);}
-.brand h1{font-size:28px;font-weight:700;text-shadow:0px 0px 15px var(--glow-highlight);letter-spacing:1px;display:flex;align-items:center;white-space:nowrap;color:var(--text-primary);}
+
+/* NEON GLOW PULSE ADDED HERE */
+.brand h1{font-size:28px;font-weight:800;letter-spacing:2px;display:flex;align-items:center;white-space:nowrap;color:#ffffff;animation: neonPulse 1.5s ease-in-out infinite alternate;} 
+@keyframes neonPulse { 
+    from { text-shadow: 0 0 5px #fff, 0 0 10px var(--highlight), 0 0 20px var(--highlight), 0 0 40px var(--highlight); } 
+    to { text-shadow: 0 0 2px #fff, 0 0 5px var(--highlight), 0 0 10px var(--highlight), 0 0 20px var(--highlight); } 
+}
+
 .cursor{font-weight:300;margin-left:2px;color:var(--highlight);animation:blink 0.8s infinite alternate;position:relative;top:-2px}
 @keyframes blink{0%{opacity:0}100%{opacity:1}}
 .custom-badges{display:flex;gap:8px;margin-left:10px;align-items:center}
@@ -648,7 +655,7 @@ function renQ(){
             let border = q.l ? (cClass==='correct-anim'?'#10b981':(cClass==='incorrect-anim'?'#ef4444':'rgba(255,255,255,0.1)')) : (isSel?'#3b82f6':'rgba(255,255,255,0.1)');
             
             h+=`<label class="option-label ${l}" style="display:flex; align-items:center; cursor:${q.l?'default':'pointer'}; padding:16px 20px; border:2px solid ${border}; border-radius:12px; background:${bg}; font-weight:500; color:#f8fafc; transition:all 0.3s ease; box-shadow: ${isSel && !q.l ? '0 4px 15px rgba(59,130,246,0.2)' : 'none'};">
-                <input type="checkbox" name="q-multi-opt" value="${i}" ${isSel?"checked":""} ${q.l?"disabled":""} style="margin-right:20px; width:22px; height:22px; cursor:pointer; accent-color:#3b82f6; border-radius:6px;">
+                <input type="checkbox" name="q-multi-opt" value="${i}" ${isSel?"checked":""} ${q.l?"disabled":""} onchange="handleMultiChange(this, ${i})" style="margin-right:20px; width:22px; height:22px; cursor:pointer; accent-color:#3b82f6; border-radius:6px;">
                 <span style="color:${isSel||q.l?'#ffffff':'#94a3b8'}; font-weight:700; margin-right:20px; font-size:16px; background:${isSel&&!q.l?'#3b82f6':(cClass==='correct-anim'?'#10b981':(cClass==='incorrect-anim'?'#ef4444':'rgba(255,255,255,0.1)'))}; padding:6px 14px; border-radius:8px; transition:all 0.3s;">${String.fromCharCode(65+i)}</span>
                 <span style="font-size:1.05rem; line-height:1.5;">${o}</span>
             </label>`;
@@ -686,31 +693,6 @@ function renQ(){
             <button class="btn btn-outline" style="margin-top: 10px; padding: 10px 25px; font-weight: 700; border: 2px solid #3b82f6; color: #60a5fa; background: rgba(59,130,246,0.1); cursor: pointer; border-radius: 8px; transition: all 0.3s;" onmouseover="this.style.background='rgba(59, 130, 246, 0.2)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.background='rgba(59, 130, 246, 0.1)'; this.style.transform='none';" onclick="openSolutionPanel()">View Detailed Solution</button>
         </div>`;
     document.getElementById("q-area").innerHTML=h;
-
-    // Attach dynamic real-time CSS updates for Multi-Choice checkboxes before checking
-    if (type === 'multi' && !q.l) {
-        document.querySelectorAll('input[name="q-multi-opt"]').forEach(cb => {
-            cb.addEventListener('change', function() {
-                let lbl = this.parentElement;
-                let span = lbl.querySelector('span');
-                document.getElementById('error-message').style.display = 'none';
-                
-                if(this.checked) {
-                    lbl.style.borderColor = '#3b82f6';
-                    lbl.style.background = 'rgba(59,130,246,0.15)';
-                    lbl.style.boxShadow = '0 4px 15px rgba(59,130,246,0.2)';
-                    span.style.background = '#3b82f6';
-                    span.style.color = '#ffffff';
-                } else {
-                    lbl.style.borderColor = 'rgba(255,255,255,0.1)';
-                    lbl.style.background = 'rgba(255,255,255,0.03)';
-                    lbl.style.boxShadow = 'none';
-                    span.style.background = 'rgba(255,255,255,0.1)';
-                    span.style.color = '#94a3b8';
-                }
-            });
-        });
-    }
 }
 
 // --- DYNAMIC INPUT HANDLERS ---
@@ -720,6 +702,38 @@ function selO(i){
     qData[cIdx].st="not-answered";
     saveP();renQ();
 }
+
+window.handleMultiChange = function(cb, i) {
+    if(qData[cIdx].l) return;
+    let arr = Array.isArray(qData[cIdx].so) ? [...qData[cIdx].so] : [];
+    
+    if (cb.checked) {
+        if (!arr.includes(i)) arr.push(i);
+    } else {
+        arr = arr.filter(x => x !== i);
+    }
+    
+    qData[cIdx].so = arr;
+    qData[cIdx].st = "not-answered";
+    let err = document.getElementById('error-message');
+    if(err) err.style.display = 'none';
+    
+    saveP();
+    
+    let lbl = cb.parentElement;
+    let span = lbl.querySelector('span');
+    if(cb.checked) {
+        lbl.style.borderColor = '#3b82f6';
+        lbl.style.background = 'rgba(59,130,246,0.15)';
+        lbl.style.boxShadow = '0 4px 15px rgba(59,130,246,0.2)';
+        if(span) { span.style.background = '#3b82f6'; span.style.color = '#ffffff'; }
+    } else {
+        lbl.style.borderColor = 'rgba(255,255,255,0.1)';
+        lbl.style.background = 'rgba(255,255,255,0.03)';
+        lbl.style.boxShadow = 'none';
+        if(span) { span.style.background = 'rgba(255,255,255,0.1)'; span.style.color = '#94a3b8'; }
+    }
+};
 
 function selTxt(v){
     if(qData[cIdx].l)return;
@@ -736,21 +750,12 @@ function selTxt(v){
     }
 }
 
-// --- EX2 BUG FIX: READ DIRECTLY FROM DOM FOR 100% ACCURACY ---
+// --- EX2 BUG FIX: RELY PURELY ON LIVE q.so DATA FOR 100% ACCURACY ---
 function chkAns(){
     let q=qData[cIdx];
     let type = getQType(q); 
     
     if (q.l) return; 
-
-    // Directly grab exactly what is checked right now in the DOM for Ex2
-    if (type === 'multi') {
-        let selectedIndices = [];
-        document.querySelectorAll('input[name="q-multi-opt"]').forEach(cb => {
-            if (cb.checked) selectedIndices.push(parseInt(cb.value));
-        });
-        q.so = selectedIndices; 
-    }
 
     if (type === 'single' && q.so === null) return alert("Select an option!");
     if (type === 'multi' && (!Array.isArray(q.so) || q.so.length === 0)) {
@@ -765,16 +770,24 @@ function chkAns(){
     clearInterval(tmr);
     
     let isCor = false;
-    if (type === 'single') isCor = (q.so === q.c);
-    else if (type === 'multi') isCor = JSON.stringify([...q.so].sort()) === JSON.stringify([...(q.c||[])].sort());
-    else if (type === 'match') isCor = String(q.so).trim().toUpperCase() === String(q.c).trim().toUpperCase();
-    else if (type === 'numeric') isCor = String(q.so).trim() === String(q.c).trim();
+    try {
+        if (type === 'single') isCor = (q.so === q.c);
+        else if (type === 'multi') {
+            let soSort = [...(q.so||[])].sort();
+            let cSort = [...(q.c||[])].sort();
+            isCor = JSON.stringify(soSort) === JSON.stringify(cSort);
+        }
+        else if (type === 'match') isCor = String(q.so||"").trim().toUpperCase() === String(q.c||"").trim().toUpperCase();
+        else if (type === 'numeric') isCor = String(q.so||"").trim() === String(q.c||"").trim();
+    } catch(e) {
+        console.warn("Evaluation Error", e);
+        isCor = false;
+    }
     
     q.st = isCor ? "correct" : "incorrect";
 
-    // LEADERBOARD FIX: Now increments for EVERY solved question (correct or incorrect)
     const user = firebase.auth().currentUser;
-    if (user) {
+    if (user && db) {
         db.collection("users").doc(user.uid).set({
             questionsSolved: firebase.firestore.FieldValue.increment(1),
             name: user.displayName || 'Anonymous Aspirant',
@@ -790,7 +803,7 @@ function chkAns(){
     setTimeout(()=>{
         const solutionCont=document.querySelector(".solution-container");
         if(solutionCont)solutionCont.scrollIntoView({behavior:"smooth", block:"center"});
-    },200);
+    },150);
 }
 
 function updateMarksDisplay(){
@@ -800,10 +813,12 @@ function updateMarksDisplay(){
             totalAttempted++;
             let type = getQType(q);
             let isCor = false;
-            if (type === 'single') isCor = (q.so === q.c);
-            else if (type === 'multi') isCor = JSON.stringify([...(q.so||[])].sort()) === JSON.stringify([...(q.c||[])].sort());
-            else if (type === 'match') isCor = String(q.so||"").trim().toUpperCase() === String(q.c||"").trim().toUpperCase();
-            else if (type === 'numeric') isCor = String(q.so||"").trim() === String(q.c||"").trim();
+            try {
+                if (type === 'single') isCor = (q.so === q.c);
+                else if (type === 'multi') isCor = JSON.stringify([...(q.so||[])].sort()) === JSON.stringify([...(q.c||[])].sort());
+                else if (type === 'match') isCor = String(q.so||"").trim().toUpperCase() === String(q.c||"").trim().toUpperCase();
+                else if (type === 'numeric') isCor = String(q.so||"").trim() === String(q.c||"").trim();
+            } catch(e) {}
             if(isCor) correct++;
         }
     });
