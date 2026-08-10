@@ -1,4 +1,4 @@
-// --- 1. DYNAMIC CSS & UI INJECTION (MAXIMUM ENHANCEMENTS + FIXED MOBILE UX) ---
+// --- 1. DYNAMIC CSS & UI INJECTION (MAXIMUM ENHANCEMENTS & EXACT MOBILE FIXES) ---
 const style=document.createElement('style');
 style.textContent=`:root{--bg-color:#050814;--surface-color:rgba(22, 27, 46, 0.7);--text-primary:#ffffff;--text-secondary:#94a3b8;--accent-color:#ffffff;--highlight:#3b82f6;--glow-highlight:rgba(59, 130, 246, 0.6);--border-color:rgba(255,255,255,0.1);--leaderboard-bg:#0a0f1c;--diamond-color:#bc6bf0;--gift-color:#ef8716;--text-shadow-color:#ffffff;--dropdown-bg:#1e1f22;--ring-gradient:conic-gradient(#ea4335,#4285f4,#34a853,#fbbc05,#ea4335)}
 body.light-mode{--bg-color:#f1f5f9;--surface-color:rgba(255, 255, 255, 0.8);--text-primary:#0f172a;--text-secondary:#475569;--accent-color:#000000;--highlight:#2563eb;--glow-highlight:rgba(37, 99, 235, 0.4);--border-color:rgba(0,0,0,0.1);--leaderboard-bg:#e2e8f0;--dropdown-bg:#ffffff;--text-shadow-color:rgba(0,0,0,0.2)}
@@ -141,41 +141,65 @@ main{flex:1;display:flex;flex-direction:column;overflow:hidden}
 #mobile-chapter-btn { display: none; }
 
 /* =========================================================
-   MOBILE EXCLUSIVE FIXES (MAX 768px)
+   MOBILE EXCLUSIVE FIXES (MAX 768px) - STRICKLY MOBILE
    ========================================================= */
 @media screen and (max-width: 768px) {
-    /* Top Header Fixed - Restoring Profile and Logo */
-    header { padding: 12px 15px; justify-content: space-between; position: relative; flex-wrap: nowrap; z-index: 1000; }
-    .brand h1 { font-size: 1.3rem !important; }
-    #typed-text { display: inline-block; white-space: normal; } 
-    .header-actions { gap: 10px; }
-    .icon-btn { width: 38px; height: 38px; font-size: 1.1rem; }
-    .btn-google { padding: 8px 12px; font-size: 0.85rem; }
-    
-    /* Native App-Style Bottom Nav */
-    nav { 
-        position: fixed; bottom: 0; left: 0; width: 100%; 
-        background: rgba(10, 15, 28, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-        padding: 12px 0 15px 0; margin: 0; transform: none; order: unset; 
-        justify-content: space-evenly; z-index: 2000;
-        border-top: 1px solid rgba(255,255,255,0.1);
-        border-radius: 20px 20px 0 0;
-        box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+    /* 1. TOP PANEL IN TWO LINES */
+    header { 
+        flex-wrap: wrap !important; 
+        padding: 12px 15px; 
+        justify-content: space-between; 
+        gap: 10px;
     }
-    main { padding-bottom: 75px; } /* Prevents content hiding behind bottom nav */
     
-    /* Mobile Chapter Select Button */
+    /* Line 1 Items: Name, Actions */
+    .brand { order: 1; flex: 0 1 auto; min-width: 0; }
+    /* Aggressively shrinking the name size for mobile to strictly fit 1 line */
+    .brand h1 { font-size: 1.15rem !important; }
+    #typed-text { white-space: nowrap; overflow: visible; display: inline-block; }
+    .custom-badges svg { width: 18px; height: 18px; } /* Scale badges slightly down */
+
+    .header-actions { order: 2; flex: 0 0 auto; gap: 8px; }
+    .btn-google { padding: 6px 12px; font-size: 0.8rem; }
+    .icon-btn { width: 34px; height: 34px; font-size: 1rem; }
+    .nav-profile-pic { width: 34px; height: 34px; }
+    
+    /* Line 2: Navigation below the name and profile */
+    nav { 
+        order: 3; 
+        position: static; 
+        transform: none; 
+        width: 100%; 
+        justify-content: space-between; 
+        margin-top: 5px;
+        padding-top: 10px;
+        border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    nav button { font-size: 0.95rem; padding: 5px; }
+    
+    /* 2. FIX HOMEPAGE TEXT CUTTING OFF */
+    .hero { padding: 0 20px; width: 100%; box-sizing: border-box; }
+    /* Reduced size and added word-wrap so it fits easily */
+    .hero h1 { font-size: 2.3rem; text-align: center; line-height: 1.3; padding: 0; margin-bottom: 15px; word-wrap: break-word;}
+    .hero p.tagline { font-size: 0.85rem; letter-spacing: 2px; }
+    .hero p.desc { font-size: 0.95rem; padding: 0; text-align: center; word-wrap: break-word; line-height: 1.6;}
+    .hero-buttons { flex-direction: column; width: 100%; gap: 1rem; align-items: center; }
+    .btn-primary, .btn-outline { width: 100%; max-width: 100%; padding: 1rem; }
+
+    /* 3. PRACTICE SECTION ROUND PANEL FIX */
+    #practice { flex-direction: column; }
+    
+    /* Show the nice round button */
     #mobile-chapter-btn { 
         display: flex; align-items: center; justify-content: center; gap: 10px;
-        width: 100%; padding: 16px; margin-bottom: 25px;
+        width: 100%; padding: 15px; margin-bottom: 20px;
         background: linear-gradient(135deg, #3b82f6, #2563eb); 
-        color: white; border: none; border-radius: 16px; 
+        color: white; border: none; border-radius: 20px; /* Round form */
         font-size: 1.1rem; font-weight: 700; box-shadow: 0 5px 20px rgba(37,99,235,0.4);
         cursor: pointer;
     }
     
-    /* Elegant Bottom Sheet Sidebar for Mobile */
-    #practice { flex-direction: column; }
+    /* Bottom-sheet Drawer */
     .sidebar {
         position: fixed; top: auto; bottom: -100%; left: 0; width: 100%; height: 75vh;
         background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
@@ -184,8 +208,6 @@ main{flex:1;display:flex;flex-direction:column;overflow:hidden}
         padding: 2.5rem 1.5rem 4rem 1.5rem; max-height: 75vh; box-shadow: 0 -10px 40px rgba(0,0,0,0.8);
     }
     .sidebar.open { bottom: 0; }
-    
-    /* Sidebar Overlay */
     .sidebar-overlay { 
         display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
         background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
@@ -194,26 +216,24 @@ main{flex:1;display:flex;flex-direction:column;overflow:hidden}
     .sidebar-overlay.show { display: block; opacity: 1; }
     
     .exercises-container { padding: 1.5rem 1rem; width: 100%; }
-    .exercise-card { flex-direction: column; align-items: flex-start; gap: 15px; padding: 1.5rem; border-radius: 20px; }
+    .exercise-card { flex-direction: column; align-items: flex-start; gap: 12px; padding: 1.5rem; border-radius: 16px; }
     
-    /* Leaderboard Layout Fix - Showing Full Names */
+    /* 4. Leaderboard Full Details Fix */
     #leaderboard { padding: 2rem 1rem; }
-    .rankings-header { font-size: 1.8rem; text-align: center; justify-content: center; margin-bottom: 2rem; }
+    .rankings-header { font-size: 1.6rem; text-align: center; justify-content: center; margin-bottom: 2rem; }
     .lb-row { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; padding: 1.2rem; gap: 10px; text-align: left; }
     .lb-user { flex: 1 1 100%; display: flex; align-items: center; gap: 15px; }
-    
-    /* Removed Ellipsis - Full Name Wrapping */
-    .lb-name { white-space: normal; overflow: visible; font-size: 1.1rem; max-width: none; line-height: 1.3; }
+    .lb-name { white-space: normal; overflow: visible; font-size: 1.05rem; max-width: none; line-height: 1.3; }
     .lb-stats { white-space: normal; font-size: 0.85rem; }
-    .lb-score { flex: 1 1 100%; text-align: left; margin-left: 55px; padding: 8px 15px; font-size: 0.95rem; display: inline-block; width: fit-content; }
+    .lb-score { flex: 1 1 100%; text-align: left; margin-left: 55px; padding: 6px 15px; font-size: 0.95rem; display: inline-block; width: fit-content; }
 
-    /* Test Environment Enhancements */
+    /* Test Env Layout for Mobile */
     .practice-container { flex-direction: column; overflow-y: auto; padding: 10px; gap: 10px; }
     .left-panel, .right-panel { flex: none; width: 100%; min-width: 100%; border-radius: 16px; }
     .question-header { flex-wrap: wrap; gap: 10px; }
     .action-bar { flex-wrap: wrap; gap: 10px; justify-content: space-between; }
-    .btn { padding: 10px 15px; font-size: 0.9rem; }
-}`;
+}
+`;
 document.head.appendChild(style);
 
 // --- 1.5 INJECTING HTML LAYOUT ---
