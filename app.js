@@ -1,4 +1,4 @@
-// --- 1. DYNAMIC CSS & UI INJECTION (MAXIMUM ENHANCEMENTS + PREMIUM MOBILE UX) ---
+// --- 1. DYNAMIC CSS & UI INJECTION (MAXIMUM ENHANCEMENTS + FIXED MOBILE UX) ---
 const style=document.createElement('style');
 style.textContent=`:root{--bg-color:#050814;--surface-color:rgba(22, 27, 46, 0.7);--text-primary:#ffffff;--text-secondary:#94a3b8;--accent-color:#ffffff;--highlight:#3b82f6;--glow-highlight:rgba(59, 130, 246, 0.6);--border-color:rgba(255,255,255,0.1);--leaderboard-bg:#0a0f1c;--diamond-color:#bc6bf0;--gift-color:#ef8716;--text-shadow-color:#ffffff;--dropdown-bg:#1e1f22;--ring-gradient:conic-gradient(#ea4335,#4285f4,#34a853,#fbbc05,#ea4335)}
 body.light-mode{--bg-color:#f1f5f9;--surface-color:rgba(255, 255, 255, 0.8);--text-primary:#0f172a;--text-secondary:#475569;--accent-color:#000000;--highlight:#2563eb;--glow-highlight:rgba(37, 99, 235, 0.4);--border-color:rgba(0,0,0,0.1);--leaderboard-bg:#e2e8f0;--dropdown-bg:#ffffff;--text-shadow-color:rgba(0,0,0,0.2)}
@@ -12,9 +12,8 @@ header{display:flex;justify-content:space-between;align-items:center;padding:1re
 .brand{display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.3s;}
 .brand:hover{transform:scale(1.02);}
 
-/* NEON GLOW PULSE ADDED HERE */
 .brand h1{font-size:28px;font-weight:800;letter-spacing:2px;display:flex;align-items:center;white-space:nowrap;color:#ffffff;animation: neonPulse 1.5s ease-in-out infinite alternate;} 
-#typed-text { display: inline-block; max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: bottom; }
+#typed-text { display: inline-block; }
 @keyframes neonPulse { 
     from { text-shadow: 0 0 5px #fff, 0 0 10px var(--highlight), 0 0 20px var(--highlight), 0 0 40px var(--highlight); } 
     to { text-shadow: 0 0 2px #fff, 0 0 5px var(--highlight), 0 0 10px var(--highlight), 0 0 20px var(--highlight); } 
@@ -76,7 +75,7 @@ main{flex:1;display:flex;flex-direction:column;overflow:hidden}
 .chapter-list{list-style:none}.chapter-list li{padding:0.8rem 1.2rem;color:var(--text-secondary);cursor:pointer;transition:all 0.3s;border-radius:10px;margin-bottom:5px;font-weight:500;}
 .chapter-list li:hover{color:var(--text-primary);background:rgba(255,255,255,0.05);transform:translateX(5px);}
 .chapter-list li.selected{color:#ffffff;font-weight:700;background:linear-gradient(90deg, rgba(59,130,246,0.2), transparent);border-left:4px solid var(--highlight);box-shadow:inset 10px 0 20px -10px rgba(59,130,246,0.5);}
-.exercises-container{flex:1;padding:3rem;overflow-y:auto;background-color:transparent;}
+.exercises-container{flex:1;padding:3rem;overflow-y:auto;background-color:transparent; position:relative;}
 .exercise-card{background:linear-gradient(145deg, rgba(30,41,59,0.7), rgba(15,23,42,0.7));backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.05);border-radius:16px;padding:2rem;margin-bottom:1.5rem;cursor:pointer;transition:all 0.4s cubic-bezier(0.16,1,0.3,1);display:flex;justify-content:space-between;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,0.2);}
 .exercise-card:hover{transform:translateY(-5px) scale(1.01);border-color:rgba(59,130,246,0.5);box-shadow:0 15px 40px rgba(59,130,246,0.2);background:linear-gradient(145deg, rgba(30,41,59,0.9), rgba(15,23,42,0.9));}
 .exercise-card h3{color:var(--text-primary);font-size:1.3rem;margin-bottom:8px;}
@@ -138,58 +137,55 @@ main{flex:1;display:flex;flex-direction:column;overflow:hidden}
 #nav-prev { left: 15px; }
 #nav-next { right: 15px; }
 
-.hamburger-btn { display: none; }
+/* Mobile Floating Action Button - Hidden on Desktop */
+#mobile-chapter-btn { display: none; }
 
 /* =========================================================
-   MOBILE EXCLUSIVE PREMIUM UI OVERRIDE (MAX 768px)
+   MOBILE EXCLUSIVE FIXES (MAX 768px)
    ========================================================= */
 @media screen and (max-width: 768px) {
-    /* Premium Native App-style Header */
-    header { flex-wrap: nowrap; padding: 12px 15px; z-index: 2000; position: sticky; top: 0; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .hamburger-btn.active-tab { display: flex !important; align-items: center; justify-content: center; background: none; border: none; color: white; font-size: 28px; padding: 0 15px 0 0; cursor: pointer; transition: transform 0.2s; }
-    .hamburger-btn:active { transform: scale(0.9); }
+    /* Top Header Fixed - Restoring Profile and Logo */
+    header { padding: 12px 15px; justify-content: space-between; position: relative; flex-wrap: nowrap; z-index: 1000; }
+    .brand h1 { font-size: 1.3rem !important; }
+    #typed-text { display: inline-block; white-space: normal; } 
+    .header-actions { gap: 10px; }
+    .icon-btn { width: 38px; height: 38px; font-size: 1.1rem; }
+    .btn-google { padding: 8px 12px; font-size: 0.85rem; }
     
-    /* Typewriter Wrap Fix */
-    .brand h1 { font-size: 1.25rem !important; white-space: nowrap; }
-    #typed-text { max-width: 110px; display: inline-block; overflow: hidden; text-overflow: ellipsis; vertical-align: bottom; }
-    
-    /* Premium Native App-style Bottom Navigation */
+    /* Native App-Style Bottom Nav */
     nav { 
         position: fixed; bottom: 0; left: 0; width: 100%; 
-        background: rgba(10, 15, 28, 0.95); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
-        border-top: 1px solid rgba(255,255,255,0.1); 
-        padding: 15px 0 20px 0; margin: 0; transform: none; order: unset; 
-        justify-content: space-evenly; z-index: 1000;
-        box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
-        border-top-left-radius: 25px; border-top-right-radius: 25px;
+        background: rgba(10, 15, 28, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+        padding: 12px 0 15px 0; margin: 0; transform: none; order: unset; 
+        justify-content: space-evenly; z-index: 2000;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        border-radius: 20px 20px 0 0;
+        box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
     }
-    nav button { font-size: 0.95rem; padding: 8px 15px; }
-    nav button::after { bottom: -6px; height: 4px; border-radius: 4px; }
+    main { padding-bottom: 75px; } /* Prevents content hiding behind bottom nav */
     
-    /* Main Content Spacing for Bottom Nav */
-    main { padding-bottom: 80px; }
-    
-    /* Hero Section Fix */
-    .hero h1 { font-size: 2.8rem; text-align: center; line-height: 1.2; padding: 0 10px; }
-    .hero p.desc { font-size: 1rem; padding: 0 1.5rem; }
-    .hero-buttons { flex-direction: column; width: 100%; padding: 0 2rem; gap: 1rem; align-items: center; }
-    .btn-primary, .btn-outline { width: 100%; max-width: 300px; text-align: center; }
-    
-    /* Practice Tab - Hamburger Drawer Implementation */
-    #practice { flex-direction: row; position: relative; }
-    
-    /* Premium Glassmorphism Drawer */
-    .sidebar { 
-        position: fixed; top: 0; left: -320px; width: 280px; height: 100vh; 
-        background: rgba(10, 15, 28, 0.98); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
-        border-right: 1px solid rgba(255,255,255,0.1); border-bottom: none;
-        z-index: 3000; transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
-        max-height: 100vh; padding: 80px 1.5rem 6rem 1.5rem; /* Room for header and bottom nav */
-        box-shadow: none; 
+    /* Mobile Chapter Select Button */
+    #mobile-chapter-btn { 
+        display: flex; align-items: center; justify-content: center; gap: 10px;
+        width: 100%; padding: 16px; margin-bottom: 25px;
+        background: linear-gradient(135deg, #3b82f6, #2563eb); 
+        color: white; border: none; border-radius: 16px; 
+        font-size: 1.1rem; font-weight: 700; box-shadow: 0 5px 20px rgba(37,99,235,0.4);
+        cursor: pointer;
     }
-    .sidebar.open { left: 0; box-shadow: 20px 0 60px rgba(0,0,0,0.7); }
     
-    /* Drawer Overlay */
+    /* Elegant Bottom Sheet Sidebar for Mobile */
+    #practice { flex-direction: column; }
+    .sidebar {
+        position: fixed; top: auto; bottom: -100%; left: 0; width: 100%; height: 75vh;
+        background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+        border-top: 1px solid rgba(255,255,255,0.1); border-right: none;
+        border-radius: 30px 30px 0 0; z-index: 3000; transition: bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+        padding: 2.5rem 1.5rem 4rem 1.5rem; max-height: 75vh; box-shadow: 0 -10px 40px rgba(0,0,0,0.8);
+    }
+    .sidebar.open { bottom: 0; }
+    
+    /* Sidebar Overlay */
     .sidebar-overlay { 
         display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
         background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
@@ -197,24 +193,19 @@ main{flex:1;display:flex;flex-direction:column;overflow:hidden}
     }
     .sidebar-overlay.show { display: block; opacity: 1; }
     
-    .exercises-container { padding: 1.5rem 1rem 2rem 1rem; width: 100%; overflow-y: auto; }
+    .exercises-container { padding: 1.5rem 1rem; width: 100%; }
     .exercise-card { flex-direction: column; align-items: flex-start; gap: 15px; padding: 1.5rem; border-radius: 20px; }
     
-    /* Leaderboard Fixes - Strict Row Layout */
+    /* Leaderboard Layout Fix - Showing Full Names */
     #leaderboard { padding: 2rem 1rem; }
-    .rankings-header { font-size: 1.8rem; text-align: center; justify-content: center; margin-bottom: 2rem; white-space: nowrap; }
-    .lb-list { padding: 1rem; border-radius: 20px; }
+    .rankings-header { font-size: 1.8rem; text-align: center; justify-content: center; margin-bottom: 2rem; }
+    .lb-row { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; padding: 1.2rem; gap: 10px; text-align: left; }
+    .lb-user { flex: 1 1 100%; display: flex; align-items: center; gap: 15px; }
     
-    /* Ensure elements don't stack on mobile */
-    .lb-row { flex-direction: row !important; align-items: center !important; gap: 10px; padding: 1rem 0.5rem; text-align: left !important; }
-    .lb-user { flex: 1; gap: 10px; min-width: 0; display: flex; align-items: center; }
-    .rank-badge { font-size: 1.2rem; width: 30px; }
-    .small-avatar { width: 42px; height: 42px; border-width: 2px; }
-    
-    /* Name and Stat Truncation Magic */
-    .lb-name { font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px; }
-    .lb-stats { font-size: 0.75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px; }
-    .lb-score { margin-left: auto !important; padding: 6px 10px; font-size: 0.85rem; align-self: center !important; white-space: nowrap; }
+    /* Removed Ellipsis - Full Name Wrapping */
+    .lb-name { white-space: normal; overflow: visible; font-size: 1.1rem; max-width: none; line-height: 1.3; }
+    .lb-stats { white-space: normal; font-size: 0.85rem; }
+    .lb-score { flex: 1 1 100%; text-align: left; margin-left: 55px; padding: 8px 15px; font-size: 0.95rem; display: inline-block; width: fit-content; }
 
     /* Test Environment Enhancements */
     .practice-container { flex-direction: column; overflow-y: auto; padding: 10px; gap: 10px; }
@@ -222,24 +213,14 @@ main{flex:1;display:flex;flex-direction:column;overflow:hidden}
     .question-header { flex-wrap: wrap; gap: 10px; }
     .action-bar { flex-wrap: wrap; gap: 10px; justify-content: space-between; }
     .btn { padding: 10px 15px; font-size: 0.9rem; }
-    
-    .header-actions { gap: 12px; }
-    .search-bar { width: 130px; padding: 0.5rem 1rem; font-size: 0.85rem; }
-    .btn-google { padding: 8px 12px; font-size: 0.85rem; }
-    .icon-btn { width: 38px; height: 38px; font-size: 1.1rem; }
 }`;
 document.head.appendChild(style);
 
-// --- Inject Dynamic Hamburger Button and Header ---
+// --- 1.5 INJECTING HTML LAYOUT ---
 document.getElementById('inject-header').outerHTML=`
 <header>
-    <div style="display:flex; align-items:center;">
-        <button id="mobile-menu-btn" class="hamburger-btn" onclick="toggleMobileSidebar()">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-        </button>
-        <div class="brand" onclick="switchTab('home')">
-            <h1><span id="typed-text"></span><span class="cursor">|</span><span class="custom-badges"><svg class="diamond" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><mask id="diamondMask"><rect width="100" height="100" fill="white" /><g stroke="black" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="48" x2="95" y2="48" /><line x1="22" y1="20" x2="50" y2="48" /><line x1="78" y1="20" x2="50" y2="48" /><line x1="28" y1="48" x2="50" y2="92" /><line x1="72" y1="48" x2="50" y2="92" /></g></mask></defs><polygon points="50,92 5,48 22,20 78,20 95,48" fill="var(--diamond-color)" mask="url(#diamondMask)" /></svg><svg class="gift" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><mask id="giftMask"><rect width="100" height="100" fill="white" /><rect x="46" y="40" width="8" height="55" fill="black" /><rect x="15" y="66" width="70" height="7" fill="black" /></mask></defs><path d="M 45 43 C 25 12, 10 38, 43 43" stroke="var(--gift-color)" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M 55 43 C 75 12, 90 38, 57 43" stroke="var(--gift-color)" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><g mask="url(#giftMask)"><rect x="22" y="54" width="56" height="38" rx="6" fill="var(--gift-color)" /><rect x="16" y="42" width="68" height="12" rx="4" fill="var(--gift-color)" /></g></svg></span></h1>
-        </div>
+    <div class="brand" onclick="switchTab('home')">
+        <h1><span id="typed-text"></span><span class="cursor">|</span><span class="custom-badges"><svg class="diamond" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><mask id="diamondMask"><rect width="100" height="100" fill="white" /><g stroke="black" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="48" x2="95" y2="48" /><line x1="22" y1="20" x2="50" y2="48" /><line x1="78" y1="20" x2="50" y2="48" /><line x1="28" y1="48" x2="50" y2="92" /><line x1="72" y1="48" x2="50" y2="92" /></g></mask></defs><polygon points="50,92 5,48 22,20 78,20 95,48" fill="var(--diamond-color)" mask="url(#diamondMask)" /></svg><svg class="gift" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><mask id="giftMask"><rect width="100" height="100" fill="white" /><rect x="46" y="40" width="8" height="55" fill="black" /><rect x="15" y="66" width="70" height="7" fill="black" /></mask></defs><path d="M 45 43 C 25 12, 10 38, 43 43" stroke="var(--gift-color)" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M 55 43 C 75 12, 90 38, 57 43" stroke="var(--gift-color)" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><g mask="url(#giftMask)"><rect x="22" y="54" width="56" height="38" rx="6" fill="var(--gift-color)" /><rect x="16" y="42" width="68" height="12" rx="4" fill="var(--gift-color)" /></g></svg></span></h1>
     </div>
     <nav>
         <button id="btn-tab-home" onclick="switchTab('home')">Home</button>
@@ -265,12 +246,23 @@ document.getElementById('inject-header').outerHTML=`
 document.getElementById('inject-home').outerHTML=`<div id="home" class="tab-content"><div id="canvas-container"></div><div class="hero"><p class="tagline">Welcome to the Matrix</p><h1>Elevate Your JEE Prep</h1><p class="desc">Experience a seamless, user-centric practice environment meticulously crafted for JEE Advanced aspirants. Sync your progress and conquer standard references.</p><div class="hero-buttons"><button class="btn-primary" onclick="switchTab('practice')">Start Practicing</button><button class="btn-outline" onclick="togglePanel()">Platform Info</button></div></div><div class="sliding-panel" id="info-panel"><button class="close-panel" onclick="togglePanel()">×</button><h2 style="color:var(--text-primary);margin-bottom:1rem; font-size:2rem;">About The Platform</h2><p style="color:var(--text-secondary);line-height:1.8;margin-bottom:1rem; font-size:1.1rem;">Hello, I am AADARSH currently I'm building this site , Creating user-centric solutions for a better tomorrow.</p><p style="color:var(--text-secondary);line-height:1.8; font-size:1.1rem;">This section is dedicated to rigorous JEE Advanced preparation. Here, you will find meticulously digitized chapters from standard references like the complete Black Book. Click on 'Start Practicing' to resume exactly where you left off in your mock tests.</p></div></div>`;
 document.getElementById('inject-leaderboard').outerHTML=`<div id="leaderboard" class="tab-content"><div class="rankings-header">GLOBAL RANKINGS</div><div class="lb-list" id="leaderboard-container"><div class="lb-empty-state" id="lb-empty-state">No members currently or loading data... Sign in and start practicing to get ranked!</div><div id="lb-dynamic-content" style="display:none; width: 100%;"></div></div></div>`;
 
-// Inject Overlay for Mobile Sidebar dynamically
-const overlayDiv = document.createElement('div');
-overlayDiv.id = 'mobile-sidebar-overlay';
-overlayDiv.className = 'sidebar-overlay';
-overlayDiv.onclick = toggleMobileSidebar;
-document.body.appendChild(overlayDiv);
+// Dynamically inject the Mobile Chapter Select button and Overlay right when JS loads
+window.addEventListener('DOMContentLoaded', () => {
+    const exercisesContainer = document.querySelector('.exercises-container');
+    if(exercisesContainer) {
+        const mobileBtnHtml = `<button id="mobile-chapter-btn" onclick="toggleMobileSidebar()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path></svg>
+            Select a Chapter
+        </button>`;
+        exercisesContainer.insertAdjacentHTML('afterbegin', mobileBtnHtml);
+    }
+    
+    const overlayDiv = document.createElement('div');
+    overlayDiv.id = 'mobile-sidebar-overlay';
+    overlayDiv.className = 'sidebar-overlay';
+    overlayDiv.onclick = toggleMobileSidebar;
+    document.body.appendChild(overlayDiv);
+});
 
 
 // --- 2. TYPEWRITER EFFECT LOGIC ---
@@ -359,7 +351,7 @@ function initLiveLeaderboard() {
                 <div class="lb-user">
                     <div class="rank-badge">#${rank}</div>
                     <img class="small-avatar" src="${data.photoURL}" alt="Avatar" referrerpolicy="no-referrer">
-                    <div style="min-width:0;">
+                    <div>
                         <div class="lb-name">${data.name}</div>
                         <div class="lb-stats">JEE Advanced Aspirant</div>
                     </div>
@@ -412,7 +404,7 @@ function signOutUser(){auth.signOut().then(()=>{dropdown.classList.remove('show'
 function toggleDropdown(){dropdown.classList.toggle('show');}
 document.addEventListener('click',function(event){if(profileWrapper.style.display==='block'){const isClickInside=profileWrapper.contains(event.target);if(!isClickInside&&dropdown.classList.contains('show')){dropdown.classList.remove('show');}}});
 
-// --- 4. UI LOGIC (Tabs, Themes, Sidebar Navigation, LocalStorage Persistence) ---
+// --- 4. UI LOGIC (Tabs, Themes, Sidebar Navigation) ---
 function switchTab(tabId){
     localStorage.setItem('activeTab', tabId);
 
@@ -426,19 +418,15 @@ function switchTab(tabId){
     if(btnTab) btnTab.classList.add('active');
     
     const searchBar = document.getElementById('search-input');
-    const hamburger = document.getElementById('mobile-menu-btn');
     
     if(tabId==='practice'){
         searchBar.style.display='block';
-        if(hamburger) hamburger.classList.add('active-tab'); // Show hamburger on mobile
-    }
-    else{
+    } else {
         searchBar.style.display='none';
-        if(hamburger) hamburger.classList.remove('active-tab'); // Hide hamburger on mobile
     }
 }
 
-// Hamburger Drawer Logic Strictly for Mobile
+// Chapter Bottom-Sheet Drawer Logic Strictly for Mobile
 function toggleMobileSidebar() {
     const sidebar = document.querySelector('.sidebar');
     const overlay = document.getElementById('mobile-sidebar-overlay');
