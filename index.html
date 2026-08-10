@@ -449,14 +449,14 @@
                 <div style="margin-top: 30px; color: white; font-weight: bold; letter-spacing: 1px;">Loading Solution...</div>
             </div>
 
-            <div id="zoom-container" style="flex: 1; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; touch-action: none;">
+            <div id="zoom-container" style="flex: 1; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; touch-action: none; cursor: default;">
                 <div id="book-wrapper" style="display: none; box-shadow: 0 10px 40px rgba(0,0,0,0.3); transform-origin: center center;"></div>
             </div>
 
             <div id="zoom-controls" style="display: none; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: #4a4a4a; padding: 6px 16px; border-radius: 30px; z-index: 1020; gap: 15px; align-items: center; color: white;">
-                <button id="zoom-out-btn" onclick="fbScale = Math.max(fbScale - 0.1, 1); updateFbTransform();" style="background: #ffffff; color: #333; border: none; width: 30px; height: 30px; border-radius: 50%; font-size: 22px; cursor: pointer;">-</button>
+                <button id="zoom-out-btn" onclick="fbScale = Math.max(fbScale - 0.2, 1); updateFbTransform();" style="background: #ffffff; color: #333; border: none; width: 30px; height: 30px; border-radius: 50%; font-size: 22px; cursor: pointer;">-</button>
                 <span id="zoom-level-text">100%</span>
-                <button id="zoom-in-btn" onclick="fbScale = Math.min(fbScale + 0.1, 3); updateFbTransform();" style="background: #ffffff; color: #333; border: none; width: 30px; height: 30px; border-radius: 50%; font-size: 22px; cursor: pointer;">+</button>
+                <button id="zoom-in-btn" onclick="fbScale = Math.min(fbScale + 0.2, 5); updateFbTransform();" style="background: #ffffff; color: #333; border: none; width: 30px; height: 30px; border-radius: 50%; font-size: 22px; cursor: pointer;">+</button>
             </div>
         </div>
     </div>
