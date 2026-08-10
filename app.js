@@ -105,7 +105,8 @@ function initLiveLeaderboard() {
     const lbContainer = document.getElementById('lb-dynamic-content');
     const lbEmpty = document.getElementById('lb-empty-state');
     
-    db.collection("users").orderBy("questionsSolved", "desc").limit(50)
+    // CHANGED: Massively increased limit to 1000 so it never feels "stuck" for top users
+    db.collection("users").orderBy("questionsSolved", "desc").limit(1000)
       .onSnapshot((querySnapshot) => {
         if (querySnapshot.empty) {
             lbEmpty.style.display = 'block';
@@ -323,13 +324,20 @@ async function openSolutionPanel() {
     
     let pdfUrl = PDF_BASE_URL + pdfFilename;
 
-    if (currentLoadedPdf === pdfUrl && isBookLoaded) return; // Prevent double load
+    // CHANGED: If it's already loaded for this chapter, do absolutely nothing! (Instant pop-up)
+    if (currentLoadedPdf === pdfUrl && isBookLoaded && document.getElementById('book-wrapper').innerHTML !== '') {
+        return; 
+    }
 
-    // Reset environment completely if changing chapter
+    // Only hit this code if it's a NEW chapter
     isBookLoaded = false;
     currentLoadedPdf = pdfUrl;
     fbScale = 1; updateFbTransform();
-    if(pageFlipObject) { pageFlipObject.destroy(); pageFlipObject = null; }
+    
+    if(pageFlipObject) { 
+        pageFlipObject.destroy(); 
+        pageFlipObject = null; 
+    }
     
     const wrapper = document.getElementById('book-wrapper');
     const loader = document.getElementById('loader-wrapper');
@@ -347,7 +355,7 @@ async function openSolutionPanel() {
         const pdf = await loadingTask.promise;
         
         const renderPromises = [];
-        // Loop max 40 pages dynamically from Github
+        // Max 40 pages dynamically to keep performance solid
         let renderCount = Math.min(pdf.numPages, 40); 
         for (let i = 1; i <= renderCount; i++) {
             renderPromises.push(renderPageToHTML(pdf, i));
@@ -361,7 +369,7 @@ async function openSolutionPanel() {
             minWidth: 300, maxWidth: 600, minHeight: 400, maxHeight: 800,
             drawShadow: true, showCover: true, usePortrait: true, 
             mobileScrollSupport: false,
-            useMouseEvents: false // Vital: stops default page swipe breaking
+            useMouseEvents: false 
         });
         pageFlipObject.loadFromHTML(document.querySelectorAll('.fb-page'));
 
@@ -445,16 +453,16 @@ function renQ(){
     document.getElementById("btn-chk").disabled=q.l;
     document.getElementById("btn-chk").innerText=q.l?"Checked":"Check Answer";
     
-    // allow selecting question text safely without messing up clicks globally
     let h=`<div><h3 style="margin-bottom:15px;line-height:1.5; -webkit-user-select: text; user-select: text;">${q.t}</h3></div><div style="margin-top:25px;display:flex;flex-direction:column;gap:12px">`;
     
+    // CHANGED: Converted <label> to <div> to completely destroy the native browser double-fire bug on Ex2 checkboxes
     if (type === 'single') {
         q.o.forEach((o,i)=>{
             let c="";
             if(q.so===i&&!q.l)c="selected";
             if(q.l&&q.so===i){if(i===q.c)c="correct";else c="incorrect";}
-            // pointer-events:none stops the browser from checking the checkbox itself and firing an extra event
-            h+=`<label class="option-label ${c} ${l}" onclick="if(!${q.l}) selO(${i}); event.preventDefault();"><input type="radio" name="o" ${q.so===i?"checked":""} ${q.l?"disabled":""} style="pointer-events:none;"><span style="color:#60a5fa;font-weight:bold;flex-shrink:0">${String.fromCharCode(65+i)}</span><span>${o}</span></label>`;
+            
+            h+=`<div class="option-label ${c} ${l}" onclick="if(!${q.l}) selO(${i})"><input type="radio" name="o" ${q.so===i?"checked":""} ${q.l?"disabled":""} style="pointer-events:none;"><span style="color:#60a5fa;font-weight:bold;flex-shrink:0">${String.fromCharCode(65+i)}</span><span>${o}</span></div>`;
         });
     } else if (type === 'multi') {
         let soArr = Array.isArray(q.so) ? q.so : [];
@@ -464,8 +472,9 @@ function renQ(){
             let isCor = Array.isArray(q.c) && q.c.includes(i);
             if(isSel&&!q.l)c="selected";
             if(q.l&&isSel){if(isCor)c="correct";else c="incorrect";}
-            // Fix double firing in Ex2
-            h+=`<label class="option-label ${c} ${l}" onclick="if(!${q.l}) selMulti(${i}); event.preventDefault();"><input type="checkbox" ${isSel?"checked":""} ${q.l?"disabled":""} style="pointer-events:none;"><span style="color:#60a5fa;font-weight:bold;flex-shrink:0">${String.fromCharCode(65+i)}</span><span>${o}</span></label>`;
+            
+            // FIXED THE DOUBLE CLICK BUG! This <div> structure fires exactly once without bubbling to input natively.
+            h+=`<div class="option-label ${c} ${l}" onclick="if(!${q.l}) selMulti(${i})"><input type="checkbox" ${isSel?"checked":""} ${q.l?"disabled":""} style="pointer-events:none;"><span style="color:#60a5fa;font-weight:bold;flex-shrink:0">${String.fromCharCode(65+i)}</span><span>${o}</span></div>`;
         });
     } else if (type === 'match' || type === 'numeric') {
         let val = q.so || "";
@@ -540,8 +549,10 @@ function chkAns(){
     let q=qData[cIdx];
     let type = q.type || 'single';
     
+    if (q.l) return; // Prevent any possible double checking
+
     if (type === 'single' && q.so === null) return alert("Select an option!");
-    // The previous error where "Select at least one option" was triggering is fixed because the array state is now completely stable.
+    // With the <div> fix, q.so will correctly update, preventing this alert from triggering incorrectly.
     if (type === 'multi' && (!Array.isArray(q.so) || q.so.length === 0)) return alert("Select at least one option!");
     if ((type === 'match' || type === 'numeric') && (!q.so || String(q.so).trim() === "")) return alert("Enter an answer!");
     
@@ -556,7 +567,6 @@ function chkAns(){
     
     if(isCor){
         q.st="correct";
-        // 100% Guaranteed Leaderboard Incrementation Fix using set & merge!
         const user = firebase.auth().currentUser;
         if (user) {
             db.collection("users").doc(user.uid).set({
@@ -638,14 +648,8 @@ function closeTest(){
         clearInterval(tmr);
         document.getElementById('mock-test-environment').style.display='none';
         
-        // Destory flipbook completely on exiting so it reliably loads on next practice
-        isBookLoaded = false;
-        currentLoadedPdf = "";
-        if(pageFlipObject) { 
-            pageFlipObject.destroy(); 
-            pageFlipObject = null; 
-        }
-        document.getElementById('book-wrapper').innerHTML = '';
+        // CHANGED: We DO NOT destroy the flipbook here. We only close the panel visually. 
+        // This ensures that when you reopen the test for the same chapter, the PDF is INSTANTLY available.
         closeSolutionPanel();
     }
 }
