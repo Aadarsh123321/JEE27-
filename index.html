@@ -16,9 +16,17 @@
     <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
 
     <style>
-        /* Disable text selection globally to prevent mobile popup */
-        body { -webkit-user-select: none; user-select: none; }
-        input[type="text"], input[type="number"] { -webkit-user-select: text; user-select: text; }
+        /* Disable text selection and mobile popups globally */
+        body { 
+            -webkit-touch-callout: none; 
+            -webkit-user-select: none; 
+            user-select: none; 
+        }
+        input[type="text"], input[type="number"] { 
+            -webkit-touch-callout: default; 
+            -webkit-user-select: text; 
+            user-select: text; 
+        }
 
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -135,7 +143,8 @@
 
             <div class="exercises-container" id="exercises-view">
                 <h2 id="default-msg" style="margin-bottom: 2rem; color: var(--text-primary);">Select a chapter to begin practice</h2>
-                <!-- Keep all your existing chapter divs exactly the same here -->
+                
+                <!-- CALCULUS CHAPTERS -->
                 <div id="ch-Function" class="chapter-content" data-chapter="Function" style="display: none;">
                     <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Function</h2>
                     <div class="exercise-card" onclick="loadTestScript('Function', 'Exercise-1: Single Choice Problems', 'js/Function_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3><p style="color: var(--text-secondary); font-size: 0.9rem;">Start timed practice session</p></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
@@ -144,7 +153,236 @@
                     <div class="exercise-card" onclick="loadTestScript('Function', 'Exercise-4: Matching Type Problems', 'js/Function_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3><p style="color: var(--text-secondary); font-size: 0.9rem;">Start timed practice session</p></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
                     <div class="exercise-card" onclick="loadTestScript('Function', 'Exercise-5: Subjective Type Problems', 'js/Function_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3><p style="color: var(--text-secondary); font-size: 0.9rem;">Start timed practice session</p></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
                 </div>
-                <!-- Add back the rest of the chapters here exactly as they were in your original code. I shortened it just for readability, but DO NOT skip them! -->
+
+                <div id="ch-Limit" class="chapter-content" data-chapter="Limit" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Limit</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Limit', 'Exercise-1: Single Choice Problems', 'js/Limit_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Limit', 'Exercise-2: One or More than One Answer is/are Correct', 'js/Limit_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Limit', 'Exercise-3: Comprehension Type Problems', 'js/Limit_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Limit', 'Exercise-4: Matching Type Problems', 'js/Limit_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Limit', 'Exercise-5: Subjective Type Problems', 'js/Limit_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <div id="ch-ContinuityandDifferentiability" class="chapter-content" data-chapter="Continuity & Differentiability" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Continuity & Differentiability</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Continuity & Differentiability', 'Exercise-1: Single Choice Problems', 'js/Continuity_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Continuity & Differentiability', 'Exercise-2: One or More than One Answer is/are Correct', 'js/Continuity_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Continuity & Differentiability', 'Exercise-3: Comprehension Type Problems', 'js/Continuity_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Continuity & Differentiability', 'Exercise-4: Matching Type Problems', 'js/Continuity_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Continuity & Differentiability', 'Exercise-5: Subjective Type Problems', 'js/Continuity_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <div id="ch-ApplicationofDerivatives" class="chapter-content" data-chapter="Application of Derivatives" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Application of Derivatives</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Application of Derivatives', 'Exercise-1: Single Choice Problems', 'js/AOD_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Application of Derivatives', 'Exercise-2: One or More than One Answer is/are Correct', 'js/AOD_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Application of Derivatives', 'Exercise-3: Comprehension Type Problems', 'js/AOD_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Application of Derivatives', 'Exercise-4: Matching Type Problems', 'js/AOD_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Application of Derivatives', 'Exercise-5: Subjective Type Problems', 'js/AOD_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <div id="ch-Integration" class="chapter-content" data-chapter="Integration" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Integration</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Integration', 'Exercise-1: Single Choice Problems', 'js/Integration_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Integration', 'Exercise-2: One or More than One Answer is/are Correct', 'js/Integration_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Integration', 'Exercise-3: Comprehension Type Problems', 'js/Integration_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Integration', 'Exercise-4: Matching Type Problems', 'js/Integration_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Integration', 'Exercise-5: Subjective Type Problems', 'js/Integration_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <div id="ch-AreaUnderCurves" class="chapter-content" data-chapter="Area Under Curves" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Area Under Curves</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Area Under Curves', 'Exercise-1: Single Choice Problems', 'js/AUC_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Area Under Curves', 'Exercise-2: One or More than One Answer is/are Correct', 'js/AUC_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Area Under Curves', 'Exercise-3: Comprehension Type Problems', 'js/AUC_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Area Under Curves', 'Exercise-4: Matching Type Problems', 'js/AUC_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Area Under Curves', 'Exercise-5: Subjective Type Problems', 'js/AUC_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <div id="ch-DifferentialEquations" class="chapter-content" data-chapter="Differential Equations" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Differential Equations</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Differential Equations', 'Exercise-1: Single Choice Problems', 'js/Differential_Equations_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Differential Equations', 'Exercise-2: One or More than One Answer is/are Correct', 'js/Differential_Equations_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Differential Equations', 'Exercise-3: Comprehension Type Problems', 'js/Differential_Equations_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Differential Equations', 'Exercise-4: Matching Type Problems', 'js/Differential_Equations_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Differential Equations', 'Exercise-5: Subjective Type Problems', 'js/Differential_Equations_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <!-- ALGEBRA CHAPTERS -->
+                <div id="ch-QuadraticEquations" class="chapter-content" data-chapter="Quadratic Equations" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Quadratic Equations</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Quadratic Equations', 'Exercise-1: Single Choice Problems', 'js/Quadratic_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Quadratic Equations', 'Exercise-2: One or More than One Answer is/are Correct', 'js/Quadratic_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Quadratic Equations', 'Exercise-3: Comprehension Type Problems', 'js/Quadratic_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Quadratic Equations', 'Exercise-4: Matching Type Problems', 'js/Quadratic_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Quadratic Equations', 'Exercise-5: Subjective Type Problems', 'js/Quadratic_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <div id="ch-SequenceandSeries" class="chapter-content" data-chapter="Sequence and Series" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Sequence and Series</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Sequence and Series', 'Exercise-1: Single Choice Problems', 'js/Sequence_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Sequence and Series', 'Exercise-2: One or More than One Answer is/are Correct', 'js/Sequence_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Sequence and Series', 'Exercise-3: Comprehension Type Problems', 'js/Sequence_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Sequence and Series', 'Exercise-4: Matching Type Problems', 'js/Sequence_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Sequence and Series', 'Exercise-5: Subjective Type Problems', 'js/Sequence_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <div id="ch-Determinants" class="chapter-content" data-chapter="Determinants" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Determinants</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Determinants', 'Exercise-1: Single Choice Problems', 'js/Determinants_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Determinants', 'Exercise-2: One or More than One Answer is/are Correct', 'js/Determinants_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Determinants', 'Exercise-3: Comprehension Type Problems', 'js/Determinants_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Determinants', 'Exercise-4: Matching Type Problems', 'js/Determinants_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Determinants', 'Exercise-5: Subjective Type Problems', 'js/Determinants_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <div id="ch-ComplexNumbers" class="chapter-content" data-chapter="Complex Numbers" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Complex Numbers</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Complex Numbers', 'Exercise-1: Single Choice Problems', 'js/Complex_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Complex Numbers', 'Exercise-2: One or More than One Answer is/are Correct', 'js/Complex_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Complex Numbers', 'Exercise-3: Comprehension Type Problems', 'js/Complex_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Complex Numbers', 'Exercise-4: Matching Type Problems', 'js/Complex_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Complex Numbers', 'Exercise-5: Subjective Type Problems', 'js/Complex_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <div id="ch-Matrices" class="chapter-content" data-chapter="Matrices" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Matrices</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Matrices', 'Exercise-1: Single Choice Problems', 'js/Matrices_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Matrices', 'Exercise-2: One or More than One Answer is/are Correct', 'js/Matrices_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Matrices', 'Exercise-3: Comprehension Type Problems', 'js/Matrices_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Matrices', 'Exercise-4: Matching Type Problems', 'js/Matrices_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Matrices', 'Exercise-5: Subjective Type Problems', 'js/Matrices_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <div id="ch-PermutationandCombinations" class="chapter-content" data-chapter="Permutation & Combinations" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Permutation & Combinations</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Permutation & Combinations', 'Exercise-1: Single Choice Problems', 'js/PnC_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Permutation & Combinations', 'Exercise-2: One or More than One Answer is/are Correct', 'js/PnC_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Permutation & Combinations', 'Exercise-3: Comprehension Type Problems', 'js/PnC_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Permutation & Combinations', 'Exercise-4: Matching Type Problems', 'js/PnC_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Permutation & Combinations', 'Exercise-5: Subjective Type Problems', 'js/PnC_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <div id="ch-BinomialTheorem" class="chapter-content" data-chapter="Binomial Theorem" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Binomial Theorem</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Binomial Theorem', 'Exercise-1: Single Choice Problems', 'js/Binomial_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Binomial Theorem', 'Exercise-2: One or More than One Answer is/are Correct', 'js/Binomial_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Binomial Theorem', 'Exercise-3: Comprehension Type Problems', 'js/Binomial_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Binomial Theorem', 'Exercise-4: Matching Type Problems', 'js/Binomial_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Binomial Theorem', 'Exercise-5: Subjective Type Problems', 'js/Binomial_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <div id="ch-Probability" class="chapter-content" data-chapter="Probability" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Probability</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Probability', 'Exercise-1: Single Choice Problems', 'js/Probability_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Probability', 'Exercise-2: One or More than One Answer is/are Correct', 'js/Probability_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Probability', 'Exercise-3: Comprehension Type Problems', 'js/Probability_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Probability', 'Exercise-4: Matching Type Problems', 'js/Probability_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Probability', 'Exercise-5: Subjective Type Problems', 'js/Probability_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <div id="ch-Logarithms" class="chapter-content" data-chapter="Logarithms" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Logarithms</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Logarithms', 'Exercise-1: Single Choice Problems', 'js/Logarithms_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Logarithms', 'Exercise-2: One or More than One Answer is/are Correct', 'js/Logarithms_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Logarithms', 'Exercise-3: Comprehension Type Problems', 'js/Logarithms_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Logarithms', 'Exercise-4: Matching Type Problems', 'js/Logarithms_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Logarithms', 'Exercise-5: Subjective Type Problems', 'js/Logarithms_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <!-- CO-ORDINATE GEOMETRY CHAPTERS -->
+                <div id="ch-StraightLines" class="chapter-content" data-chapter="Straight Lines" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Straight Lines</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Straight Lines', 'Exercise-1: Single Choice Problems', 'js/StraightLines_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Straight Lines', 'Exercise-2: One or More than One Answer is/are Correct', 'js/StraightLines_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Straight Lines', 'Exercise-3: Comprehension Type Problems', 'js/StraightLines_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Straight Lines', 'Exercise-4: Matching Type Problems', 'js/StraightLines_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Straight Lines', 'Exercise-5: Subjective Type Problems', 'js/StraightLines_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <div id="ch-Circle" class="chapter-content" data-chapter="Circle" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Circle</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Circle', 'Exercise-1: Single Choice Problems', 'js/Circle_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Circle', 'Exercise-2: One or More than One Answer is/are Correct', 'js/Circle_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Circle', 'Exercise-3: Comprehension Type Problems', 'js/Circle_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Circle', 'Exercise-4: Matching Type Problems', 'js/Circle_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Circle', 'Exercise-5: Subjective Type Problems', 'js/Circle_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <div id="ch-Parabola" class="chapter-content" data-chapter="Parabola" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Parabola</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Parabola', 'Exercise-1: Single Choice Problems', 'js/Parabola_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Parabola', 'Exercise-2: One or More than One Answer is/are Correct', 'js/Parabola_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Parabola', 'Exercise-3: Comprehension Type Problems', 'js/Parabola_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Parabola', 'Exercise-4: Matching Type Problems', 'js/Parabola_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Parabola', 'Exercise-5: Subjective Type Problems', 'js/Parabola_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <div id="ch-Ellipse" class="chapter-content" data-chapter="Ellipse" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Ellipse</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Ellipse', 'Exercise-1: Single Choice Problems', 'js/Ellipse_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Ellipse', 'Exercise-2: One or More than One Answer is/are Correct', 'js/Ellipse_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Ellipse', 'Exercise-3: Comprehension Type Problems', 'js/Ellipse_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Ellipse', 'Exercise-4: Matching Type Problems', 'js/Ellipse_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Ellipse', 'Exercise-5: Subjective Type Problems', 'js/Ellipse_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <div id="ch-Hyperbola" class="chapter-content" data-chapter="Hyperbola" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Hyperbola</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Hyperbola', 'Exercise-1: Single Choice Problems', 'js/Hyperbola_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Hyperbola', 'Exercise-2: One or More than One Answer is/are Correct', 'js/Hyperbola_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Hyperbola', 'Exercise-3: Comprehension Type Problems', 'js/Hyperbola_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Hyperbola', 'Exercise-4: Matching Type Problems', 'js/Hyperbola_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Hyperbola', 'Exercise-5: Subjective Type Problems', 'js/Hyperbola_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <!-- TRIGONOMETRY CHAPTERS -->
+                <div id="ch-CompoundAngles" class="chapter-content" data-chapter="Compound Angles" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Compound Angles</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Compound Angles', 'Exercise-1: Single Choice Problems', 'js/CompoundAngles_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Compound Angles', 'Exercise-2: One or More than One Answer is/are Correct', 'js/CompoundAngles_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Compound Angles', 'Exercise-3: Comprehension Type Problems', 'js/CompoundAngles_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Compound Angles', 'Exercise-4: Matching Type Problems', 'js/CompoundAngles_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Compound Angles', 'Exercise-5: Subjective Type Problems', 'js/CompoundAngles_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <div id="ch-TrigonometricEquations" class="chapter-content" data-chapter="Trigonometric Equations" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Trigonometric Equations</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Trigonometric Equations', 'Exercise-1: Single Choice Problems', 'js/TrigEquations_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Trigonometric Equations', 'Exercise-2: One or More than One Answer is/are Correct', 'js/TrigEquations_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Trigonometric Equations', 'Exercise-3: Comprehension Type Problems', 'js/TrigEquations_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Trigonometric Equations', 'Exercise-4: Matching Type Problems', 'js/TrigEquations_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Trigonometric Equations', 'Exercise-5: Subjective Type Problems', 'js/TrigEquations_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <div id="ch-SolutionofTriangles" class="chapter-content" data-chapter="Solution of Triangles" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Solution of Triangles</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Solution of Triangles', 'Exercise-1: Single Choice Problems', 'js/SolOfTriangles_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Solution of Triangles', 'Exercise-2: One or More than One Answer is/are Correct', 'js/SolOfTriangles_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Solution of Triangles', 'Exercise-3: Comprehension Type Problems', 'js/SolOfTriangles_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Solution of Triangles', 'Exercise-4: Matching Type Problems', 'js/SolOfTriangles_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Solution of Triangles', 'Exercise-5: Subjective Type Problems', 'js/SolOfTriangles_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <div id="ch-InverseTrigonometricFunctions" class="chapter-content" data-chapter="Inverse Trigonometric Functions" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Inverse Trigonometric Functions</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Inverse Trigonometric Functions', 'Exercise-1: Single Choice Problems', 'js/ITF_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Inverse Trigonometric Functions', 'Exercise-2: One or More than One Answer is/are Correct', 'js/ITF_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Inverse Trigonometric Functions', 'Exercise-3: Comprehension Type Problems', 'js/ITF_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Inverse Trigonometric Functions', 'Exercise-4: Matching Type Problems', 'js/ITF_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Inverse Trigonometric Functions', 'Exercise-5: Subjective Type Problems', 'js/ITF_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
+                <!-- VECTOR & 3D CHAPTERS -->
+                <div id="ch-Vectorand3DimensionalGeometry" class="chapter-content" data-chapter="Vector & 3Dimensional Geometry" style="display: none;">
+                    <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-primary);">Vector & 3Dimensional Geometry</h2>
+                    <div class="exercise-card" onclick="loadTestScript('Vector & 3Dimensional Geometry', 'Exercise-1: Single Choice Problems', 'js/Vector3D_Ex1.js')"><div><h3 style="margin-bottom: 5px;">Exercise-1: Single Choice Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Vector & 3Dimensional Geometry', 'Exercise-2: One or More than One Answer is/are Correct', 'js/Vector3D_Ex2.js')"><div><h3 style="margin-bottom: 5px;">Exercise-2: One or More than One Answer is/are Correct</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Vector & 3Dimensional Geometry', 'Exercise-3: Comprehension Type Problems', 'js/Vector3D_Ex3.js')"><div><h3 style="margin-bottom: 5px;">Exercise-3: Comprehension Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Vector & 3Dimensional Geometry', 'Exercise-4: Matching Type Problems', 'js/Vector3D_Ex4.js')"><div><h3 style="margin-bottom: 5px;">Exercise-4: Matching Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                    <div class="exercise-card" onclick="loadTestScript('Vector & 3Dimensional Geometry', 'Exercise-5: Subjective Type Problems', 'js/Vector3D_Ex5.js')"><div><h3 style="margin-bottom: 5px;">Exercise-5: Subjective Type Problems</h3></div><div style="color: var(--highlight); font-weight: bold;">Start Test &rarr;</div></div>
+                </div>
+
             </div>
         </div>
 
