@@ -44,6 +44,7 @@ function updateBrandText(newText){clearTimeout(typingTimeout);textToType=newText
 
 
 // --- NEW: EXACT GITHUB PDF SOLUTIONS DIRECTORY (From Screenshot) ---
+// Using exact names encoded for URL spaces
 const PDF_BASE_URL = "https://raw.githubusercontent.com/Aadarsh123321/JEE27-./main/";
 const chapterPdfLinks = {
     // Calculus
@@ -453,7 +454,7 @@ function renQ(){
             if(q.so===i&&!q.l)c="selected";
             if(q.l&&q.so===i){if(i===q.c)c="correct";else c="incorrect";}
             // pointer-events:none stops the browser from checking the checkbox itself and firing an extra event
-            h+=`<label class="option-label ${c} ${l}" onclick="event.preventDefault(); !${q.l}&&selO(${i})"><input type="radio" name="o" ${q.so===i?"checked":""} ${q.l?"disabled":""} style="pointer-events:none;"><span style="color:#60a5fa;font-weight:bold;flex-shrink:0">${String.fromCharCode(65+i)}</span><span>${o}</span></label>`;
+            h+=`<label class="option-label ${c} ${l}" onclick="if(!${q.l}) selO(${i}); event.preventDefault();"><input type="radio" name="o" ${q.so===i?"checked":""} ${q.l?"disabled":""} style="pointer-events:none;"><span style="color:#60a5fa;font-weight:bold;flex-shrink:0">${String.fromCharCode(65+i)}</span><span>${o}</span></label>`;
         });
     } else if (type === 'multi') {
         let soArr = Array.isArray(q.so) ? q.so : [];
@@ -464,7 +465,7 @@ function renQ(){
             if(isSel&&!q.l)c="selected";
             if(q.l&&isSel){if(isCor)c="correct";else c="incorrect";}
             // Fix double firing in Ex2
-            h+=`<label class="option-label ${c} ${l}" onclick="event.preventDefault(); !${q.l}&&selMulti(${i})"><input type="checkbox" ${isSel?"checked":""} ${q.l?"disabled":""} style="pointer-events:none;"><span style="color:#60a5fa;font-weight:bold;flex-shrink:0">${String.fromCharCode(65+i)}</span><span>${o}</span></label>`;
+            h+=`<label class="option-label ${c} ${l}" onclick="if(!${q.l}) selMulti(${i}); event.preventDefault();"><input type="checkbox" ${isSel?"checked":""} ${q.l?"disabled":""} style="pointer-events:none;"><span style="color:#60a5fa;font-weight:bold;flex-shrink:0">${String.fromCharCode(65+i)}</span><span>${o}</span></label>`;
         });
     } else if (type === 'match' || type === 'numeric') {
         let val = q.so || "";
@@ -515,7 +516,8 @@ function selMulti(i){
     else arr.push(i);
     qData[cIdx].so = arr;
     qData[cIdx].st = "not-answered";
-    saveP();renQ();
+    saveP();
+    renQ();
 }
 
 function selTxt(v){
